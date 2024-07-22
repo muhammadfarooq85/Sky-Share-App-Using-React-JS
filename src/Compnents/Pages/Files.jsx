@@ -3,7 +3,7 @@ import ButtonComp from "../Button";
 import DropzoneComp from "../DropZone";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
-import { MdFolderDelete } from "react-icons/md";
+import { MdFolderDelete, MdFilePresent, MdDelete } from "react-icons/md";
 
 function FilesPage() {
   const [files, setFiles] = useState([]);
@@ -11,14 +11,12 @@ function FilesPage() {
   const handleFileUpload = (acceptedFiles) => {
     const newFiles = acceptedFiles.map((file) => ({
       file,
-      loading: true,
+      loading: isImage(file),
     }));
-    console.log(acceptedFiles.size);
     setFiles((prevFiles) => [...prevFiles, ...newFiles]);
   };
 
   const onDrop = (acceptedFiles) => {
-    console.log(acceptedFiles);
     handleFileUpload(acceptedFiles);
     toast.success("File selected. Now, move forward.");
   };
@@ -32,13 +30,34 @@ function FilesPage() {
   };
 
   const removeImage = (index) => {
-    files.splice(index, 1);
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    toast.success("Selected file deleted successfully.");
+  };
+
+  const handleDleteAllFiles = () => {
+    if (files.length === 0) {
+      toast.error("Please select files first.");
+      return;
+    }
+    setFiles([]);
+    toast.success("All files are deleted successfully.");
+  };
+
+  const isImage = (file) => {
+    return file.type.startsWith("image/");
   };
 
   return (
     <div>
+      <div className="flex justify-end items-end mb-2">
+        <ButtonComp
+          clickOnUniversalBtn={handleDleteAllFiles}
+          title="Delete All"
+          btnIcon={<MdDelete />}
+        />
+      </div>
       <div className="mainTexts flex flex-col justify-between items-start min-h-screen w-full">
-        <div className="flex justify-start items-center flex-wrap">
+        <div className="flex justify-center items-center flex-wrap">
           {files.map((fileObj, index) => (
             <div key={index} className="p-2 relative">
               {fileObj.loading && (
@@ -49,18 +68,25 @@ function FilesPage() {
               <div className="flex flex-col justify-center items-center cursor-pointer relative">
                 <MdFolderDelete
                   onClick={() => removeImage(index)}
-                  className="absolute text-[#f3f3f3]"
-                  size={50}
+                  className="absolute text-red-600 top-1 right-1"
+                  size={30}
                 />
-                <img
-                  src={URL.createObjectURL(fileObj.file)}
-                  alt={`file-preview-${index}`}
-                  className={`w-32 h-32 object-cover rounded-md ${
-                    fileObj.loading ? "opacity-0" : "opacity-100"
-                  }`}
-                  onLoad={() => handleImageLoad(index)}
-                />
-                <span>{fileObj.file.name.slice(0, 5)}{file}</span>
+                {isImage(fileObj.file) ? (
+                  <img
+                    src={URL.createObjectURL(fileObj.file)}
+                    alt={`file-preview-${index}`}
+                    className={`w-32 h-32 object-cover rounded-md ${
+                      fileObj.loading ? "opacity-0" : "opacity-100"
+                    }`}
+                    onLoad={() => handleImageLoad(index)}
+                  />
+                ) : (
+                  <MdFilePresent size={150} />
+                )}
+                <span className="font-semibold">
+                  {fileObj.file.name.slice(0, 5)}
+                  {fileObj.file.name.slice(fileObj.file.name.lastIndexOf("."))}
+                </span>
               </div>
             </div>
           ))}
@@ -68,7 +94,7 @@ function FilesPage() {
         </div>
       </div>
       <div className="filesBtn flex justify-end items-end gap-2 p-4">
-        <ButtonComp title="Clear" onClick={() => setFiles([])} />
+        <ButtonComp title="Clear" />
         <ButtonComp title="Save" />
       </div>
     </div>

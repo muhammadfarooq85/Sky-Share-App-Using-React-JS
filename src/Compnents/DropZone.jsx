@@ -16,7 +16,7 @@ export default function DropzoneComp({ onDrop }) {
       ) : (
         <MdAdd className="w-20  h-20 cursor-pointer" />
       )}
-      <p className="text-center text-sm">
+      <p className="text-center text-sm font-semibold">
         Add Files or <br /> drag drop
       </p>
     </div>

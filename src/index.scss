@@ -147,6 +147,8 @@ body {
   .textsBtn,
   .filesBtn {
     flex-direction: column-reverse;
+    justify-items: center !important;
+    align-items: center !important;
   }
   .contactEmail {
     font-size: 10px !important;

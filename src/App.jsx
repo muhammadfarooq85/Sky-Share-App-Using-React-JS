@@ -1,7 +1,11 @@
-import "./App.css";
+import RouterComp from "./Routes";
 
 function App() {
-  return <>sdsd</>;
+  return (
+    <>
+      <RouterComp />
+    </>
+  );
 }
 
 export default App;

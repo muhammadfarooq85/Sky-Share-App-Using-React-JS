@@ -1,0 +1,16 @@
+{
+  "name": "Sky Share",
+  "short_name": "Sky Share App",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3f3f3",
+  "theme_color": "#000000",
+  "description": "A Easy tool for sharing.",
+  "icons": [
+    {
+      "src": "../src/assets/pwa-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

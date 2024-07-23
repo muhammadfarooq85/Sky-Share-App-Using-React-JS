@@ -26,7 +26,7 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem("Sky Share", "1", <SiSkyrock />),
-  getItem("Share Texts", "2", <LuScrollText />),
+  getItem("Share Text", "2", <LuScrollText />),
   getItem("Share Files", "3", <FaRegFileImage />),
   getItem("How it Works", "4", <GrWorkshop />),
   getItem("Download", "5", <VscDesktopDownload />),

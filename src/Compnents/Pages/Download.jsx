@@ -3,6 +3,7 @@ import ButtonComp from "../Button";
 import { GrInstallOption } from "react-icons/gr";
 import Image3DComp from "../Image3D";
 import fr from "../../assets/austin-distel-WO23uj_8EUU-unsplash.png";
+import FloatBtnComp from "../FloatBtn";
 
 function DownloadPage() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -41,6 +42,7 @@ function DownloadPage() {
         />
         <Image3DComp src={fr} />
       </div>
+      <FloatBtnComp />
     </div>
   );
 }

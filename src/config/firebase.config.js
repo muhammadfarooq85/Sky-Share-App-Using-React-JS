@@ -45,6 +45,8 @@ import {
   ref as storageRef,
   getDownloadURL,
   uploadBytesResumable,
+  deleteObject,
+  listAll,
 } from "firebase/storage";
 
 // Importing Firebase Keys
@@ -108,5 +110,7 @@ export {
   set,
   get,
   remove,
+  deleteObject,
   onValue,
+  listAll,
 };

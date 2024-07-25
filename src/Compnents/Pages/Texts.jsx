@@ -10,6 +10,7 @@ import {
   remove,
   onValue,
 } from "../../config/firebase.config";
+import FloatBtnComp from "../FloatBtn";
 
 function TextsPage() {
   const [textValue, setTextValue] = useState("");
@@ -37,18 +38,18 @@ function TextsPage() {
     }
 
     try {
-      await set(ref(database, "sharedText"), {
+      await set(databaseRef(database, "sharedText"), {
         textValue,
       });
-      toast.success("Your data uploaded successfully.");
+      toast.success("Your text uploaded successfully.");
     } catch (error) {
-      console.log("Please try again.");
+      toast.error("Please try again.");
     }
   };
 
   const clearUploadText = async () => {
     try {
-      await remove(ref(database, "sharedText"));
+      await remove(databaseRef(database, "sharedText"));
       toast.success("Your shared text deleted successfully.");
       setIsText(false);
       setTextValue("");
@@ -87,6 +88,7 @@ function TextsPage() {
           <ButtonComp title="Save" clickOnUniversalBtn={uploadText} />
         )}
       </div>
+      <FloatBtnComp />
     </div>
   );
 }

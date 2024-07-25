@@ -5,6 +5,7 @@ import { GrWorkshop } from "react-icons/gr";
 import { VscDesktopDownload, VscFeedback } from "react-icons/vsc";
 import { RiContactsBook3Line } from "react-icons/ri";
 import { SiSkyrock } from "react-icons/si";
+import { MdLogin } from "react-icons/md";
 import { LuScrollText } from "react-icons/lu";
 import { FaRegFileImage } from "react-icons/fa6";
 import SkySharePage from "./Pages/SkyShare";
@@ -14,6 +15,8 @@ import FeedbackPage from "./Pages/Feedback";
 import ContactPage from "./Pages/Contact";
 import DownloadPage from "./Pages/Download";
 import HowItWorksPage from "./Pages/HowItWorks";
+import SignupLoginFormPage from "./Pages/LoginSignup";
+import ThemeToggleComp from "./ThemeToggle";
 
 function getItem(label, key, icon, children) {
   return {
@@ -32,6 +35,7 @@ const items = [
   getItem("Download", "5", <VscDesktopDownload />),
   getItem("Feedback", "6", <VscFeedback />),
   getItem("Contact Us", "7", <RiContactsBook3Line />),
+  getItem("Login/Signup", "8", <MdLogin />),
 ];
 
 const LayoutComp = () => {
@@ -92,6 +96,12 @@ const LayoutComp = () => {
             <ContactPage />
           </>
         );
+      case "8":
+        return (
+          <>
+            <SignupLoginFormPage />
+          </>
+        );
       default:
         return <>Bill is a cat.</>;
     }
@@ -126,15 +136,18 @@ const LayoutComp = () => {
             margin: "0 16px",
           }}
         >
-          <Breadcrumb
-            style={{
-              margin: "16px 0",
-            }}
-          >
-            {breadcrumb.map((crumb, index) => (
-              <Breadcrumb.Item key={index}>{crumb}</Breadcrumb.Item>
-            ))}
-          </Breadcrumb>
+          <div className="flex justify-between items-center"> 
+            <Breadcrumb
+              style={{
+                margin: "16px 0",
+              }}
+            >
+              {breadcrumb.map((crumb, index) => (
+                <Breadcrumb.Item key={index}>{crumb}</Breadcrumb.Item>
+              ))}
+            </Breadcrumb>
+            <ThemeToggleComp />
+          </div>
           <div
             style={{
               padding: 24,
@@ -151,7 +164,7 @@ const LayoutComp = () => {
             textAlign: "center",
           }}
         >
-          <span className="font-light ">
+          <span className="font-light">
             This product is created by M. Farooq.
           </span>
         </Footer>

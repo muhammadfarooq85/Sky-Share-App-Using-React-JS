@@ -1,3 +1,5 @@
+import FloatBtnComp from "../FloatBtn";
+
 function HowItWorksPage() {
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -51,6 +53,7 @@ function HowItWorksPage() {
           </div>
         </div>
       </div>
+      <FloatBtnComp/>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ButtonComp from "../Button";
 import DropzoneComp from "../DropZone";
 import toast from "react-hot-toast";
@@ -12,17 +12,36 @@ import {
   databaseRef,
   database,
   set,
+  push,
 } from "../../config/firebase.config";
 import { Progress } from "antd";
 import FilesModalComp from "../FilesModal";
 import FloatBtnComp from "../FloatBtn";
+import { useTranslation } from "react-i18next";
+import InputComp from "../Input";
+import { TbPasswordFingerprint } from "react-icons/tb";
+import "../../config/i18Next";
+import { passwordRegex } from "./LoginSignup";
 
 function FilesPage() {
   const [files, setFiles] = useState([]);
   const [open, setOpen] = useState(false);
-  const [progress, setProgress] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [filesPassword, setFilesPassword] = useState("");
+  const [userKey, setUserKey] = useState("");
+
+  const { t } = useTranslation();
 
   const handleFileModal = () => {
+    if (!filesPassword) {
+      toast.error("Please provide a password.");
+      return;
+    }
+
+    if (!passwordRegex.test(filesPassword)) {
+      toast.error("Invalid password.");
+      return;
+    }
     setOpen(true);
   };
 
@@ -57,13 +76,11 @@ function FilesPage() {
       toast.error("Please select files first.");
       return;
     }
-    toast.success("All files are deleted successfully.");
     setFiles([]);
+    toast.success("All files are deleted successfully.");
   };
 
-  const isImage = (file) => {
-    return file.type.startsWith("image/");
-  };
+  const isImage = (file) => file.type.startsWith("image/");
 
   const handleAllFilesUpload = async () => {
     if (files.length === 0) {
@@ -76,8 +93,19 @@ function FilesPage() {
       return;
     }
 
+    if (!filesPassword) {
+      toast.error("Please provide a password.");
+      return;
+    }
+    if (!passwordRegex.test(filesPassword)) {
+      toast.error(
+        "Password must include one uppercase letter, one lowercase letter, one digit, one special character, and be 8 characters long."
+      );
+      return;
+    }
+
     try {
-      let fileURLs = [];
+      const fileURLs = [];
       for (let i = 0; i < files.length; i++) {
         const downloadURL = await upload(files[i].file, i);
         if (downloadURL) {
@@ -85,11 +113,14 @@ function FilesPage() {
         }
       }
 
-      await set(databaseRef(database, "sharedFiles"), {
+      const newSharedFilesRef = push(databaseRef(database, "sharedFiles"));
+      await set(newSharedFilesRef, {
         allFiles: fileURLs,
+        filesPassword,
       });
-
-      toast.success("Your files uploaded successfully.");
+      toast.success("Your files were uploaded successfully.");
+      setUserKey(newSharedFilesRef.key);
+      setFilesPassword("");
       setFiles([]);
       setProgress(0);
     } catch (error) {
@@ -100,11 +131,15 @@ function FilesPage() {
 
   const upload = (file, i) => {
     if (file.size > 1048576 * 5) {
-      toast.error("Each file must be less than 5Mb.");
-      return;
+      toast.error("Each file must be less than 5MB.");
+      return Promise.reject(new Error("File size exceeds 5MB"));
     }
+
     return new Promise((resolve, reject) => {
-      const storageFilesRef = storageRef(storage, `sharedFiles/${i}`);
+      const storageFilesRef = storageRef(
+        storage,
+        `sharedFiles/${filesPassword}/${i}`
+      );
       const uploadTask = uploadBytesResumable(storageFilesRef, file);
 
       uploadTask.on(
@@ -113,26 +148,21 @@ function FilesPage() {
           const progress = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
-          switch (snapshot.state) {
-            case "paused":
-              break;
-            case "running":
-              toast.success("Please stay patient!");
-              setProgress(progress);
-              break;
-          }
+          setProgress(progress);
         },
         (error) => {
           switch (error.code) {
             case "storage/unauthorized":
-              toast.error("User doesn't have permission to access the object");
+              toast.error("User doesn't have permission to access the object.");
               break;
             case "storage/canceled":
-              toast.error("User canceled the upload");
+              toast.error("User canceled the upload.");
               break;
             case "storage/unknown":
               toast.error("Unknown error occurred. Please try again.");
               break;
+            default:
+              toast.error("An error occurred. Please try again.");
           }
           reject(error);
         },
@@ -152,20 +182,18 @@ function FilesPage() {
   };
 
   return (
-    <div>
+    <div className="dark:bg-darkPrimary dark:text-darkSecondary">
       <div className="flex justify-end items-end mb-2">
         <ButtonComp
           clickOnUniversalBtn={handleDleteAllFiles}
-          title="Delete All"
+          title={t("deleteAll")}
           btnIcon={<MdDelete />}
         />
       </div>
-      {progress > 0 ? (
+      {progress > 0 && (
         <div className="flex justify-center items-center w-full">
           <Progress strokeLinecap="butt" percent={progress} />
         </div>
-      ) : (
-        ""
       )}
       <div className="mainTexts flex flex-col justify-between items-start min-h-screen w-full">
         <div className="filesDiv flex justify-start items-center flex-wrap">
@@ -173,7 +201,7 @@ function FilesPage() {
             <div key={index} className="p-2 relative">
               {fileObj.loading && isImage(fileObj.file) && (
                 <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
-                  <ClipLoader size={32} color={"#000"} />
+                  <ClipLoader className="loader" size={32} color={"#000"} />
                 </div>
               )}
               <div className="flex flex-col justify-center items-center cursor-pointer relative">
@@ -204,11 +232,31 @@ function FilesPage() {
           <DropzoneComp onDrop={onDrop} />
         </div>
       </div>
+      <span className="text-lg text-red-900">{t("noteFiles")}</span>
+      <InputComp
+        inputType="password"
+        inputValue={filesPassword}
+        inputOnChange={(e) => setFilesPassword(e.target.value)}
+        inputPlaceHolder=" ****** "
+      />
       <div className="filesBtn flex justify-end items-end gap-2 p-4">
-        <ButtonComp title="View Files" clickOnUniversalBtn={handleFileModal} />
-        <ButtonComp title="Save" clickOnUniversalBtn={handleAllFilesUpload} />
+        <ButtonComp
+          title={t("viewfiles")}
+          clickOnUniversalBtn={handleFileModal}
+        />
+        <ButtonComp
+          title={t("save")}
+          clickOnUniversalBtn={handleAllFilesUpload}
+        />
       </div>
-      <FilesModalComp open={open} setOpen={setOpen} />
+      <FilesModalComp
+        open={open}
+        setOpen={setOpen}
+        userKey={userKey}
+        filesPassword={filesPassword}
+        setUserKey={setUserKey}
+        handleFileModal={handleFileModal}
+      />
       <FloatBtnComp />
     </div>
   );

@@ -22,9 +22,13 @@ import { MdOutlineAttachEmail } from "react-icons/md";
 import { TbPasswordFingerprint } from "react-icons/tb";
 import { SiSkyrock } from "react-icons/si";
 import FloatBtnComp from "../FloatBtn";
+import InputComp from "../Input";
+import { useTranslation } from "react-i18next";
+import "../../config/i18Next";
 
 export let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-export let passwordRegex = /^\d{6,10}$/;
+export let passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 export default function SignupLoginFormPage() {
   const [type, setType] = useState("card");
@@ -32,6 +36,7 @@ export default function SignupLoginFormPage() {
   const [signupPassword, setSignupPassword] = useState("");
   const [signinEmail, setSigninEmail] = useState("");
   const [signinPassword, setSigninPassword] = useState("");
+  const { t } = useTranslation();
 
   //Registering User
   const registerUser = async () => {
@@ -42,7 +47,9 @@ export default function SignupLoginFormPage() {
     } else if (signupPassword === "") {
       toast.error("Please provide password.");
     } else if (!passwordRegex.test(signupPassword)) {
-      toast.error("Password must be number and between 6 to 10.");
+      toast.error(
+        "Password must be One uppercase, one lowerCase, one digit and one special character. Length should be 8."
+      );
     } else {
       await createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
         .then((userCredential) => {
@@ -88,13 +95,13 @@ export default function SignupLoginFormPage() {
   };
 
   return (
-    <div className="w-[100%] flex justify-center items-center min-h-screen">
+    <div className="w-[100%] flex justify-center items-center min-h-screen dark:bg-darkPrimary dark:text-darkSecondary">
       <Card className="w-full sm:w-[60%] md:w-[60%] lg:w-[35%]">
         <CardHeader
           color="gray"
           floated={false}
           shadow={false}
-          className="bg-secondary m-0 grid place-items-center px-4 py-8 text-center"
+          className="bg-secondary dark:bg-darkPrimary m-0 grid place-items-center px-4 py-8 text-center"
         >
           <div className="mb-4 w-full h-20 p-6 text-white flex justify-center items-center">
             {type === "card" ? (
@@ -104,17 +111,17 @@ export default function SignupLoginFormPage() {
             )}
           </div>
           <Typography variant="h5" color="white">
-            Sky Share
+            {t("appName")}
           </Typography>
         </CardHeader>
         <CardBody className="w-full">
           <Tabs value={type}>
             <TabsHeader className="relative z-0 ">
               <Tab value="card" onClick={() => setType("card")}>
-                Signup
+                {t("signup")}
               </Tab>
               <Tab value="paypal" onClick={() => setType("paypal")}>
-                Signin
+                {t("signin")}
               </Tab>
             </TabsHeader>
             <TabsBody
@@ -132,68 +139,59 @@ export default function SignupLoginFormPage() {
             >
               <TabPanel value="card" className="p-0">
                 <form className="mt-12 flex flex-col gap-4">
-                  <div>
-                    <Input
-                      type="email"
-                      icon={<MdOutlineAttachEmail />}
-                      placeholder="name@mail.com"
-                      value={signupEmail}
-                      size="lg"
-                      onChange={(e) => setSignupEmail(e.target.value)}
-                      label="Email"
-                    />
-                  </div>
+                  <InputComp
+                    inputType="email"
+                    inputValue={signupEmail}
+                    inputOnChange={(e) => setSignupEmail(e.target.value)}
+                    inputPlaceHolder="name@gmail.com"
+                    inputAddonAfter={
+                      <MdOutlineAttachEmail className="dark:text-darkSecondary" />
+                    }
+                  />
                   <div className="my-3">
-                    <Input
-                      placeholder=" ******* "
-                      size="lg"
-                      icon={<TbPasswordFingerprint />}
-                      label="Password"
-                      type="password"
-                      value={signupPassword}
-                      onChange={(e) => setSignupPassword(e.target.value)}
+                    <InputComp
+                      inputType="password"
+                      inputValue={signupPassword}
+                      inputOnChange={(e) => setSignupPassword(e.target.value)}
+                      inputPlaceHolder=" ******* "
                     />
                   </div>
                   <Button
                     size="lg"
-                    className="bg-secondary"
+                    className="bg-secondary dark:bg-darkPrimary dark:text-darkSecondary"
                     onClick={registerUser}
                   >
-                    Signup
+                    {t("signup")}
                   </Button>
                 </form>
               </TabPanel>
               <TabPanel value="paypal" className="p-0">
                 <form className="mt-12 flex flex-col gap-4">
                   <div className="w-full">
-                    <Input
-                      type="email"
-                      size="lg"
-                      icon={<MdOutlineAttachEmail />}
-                      label="Email"
-                      placeholder="name@mail.com"
-                      value={signinEmail}
-                      onChange={(e) => setSigninEmail(e.target.value)}
+                    <InputComp
+                      inputType="email"
+                      inputValue={signinEmail}
+                      inputOnChange={(e) => setSigninEmail(e.target.value)}
+                      inputPlaceHolder="name@gmail.com"
+                      inputAddonAfter={
+                        <MdOutlineAttachEmail className="dark:text-darkSecondary " />
+                      }
                     />
                   </div>
-                  <div className="my-1 w-full">
-                    <Input
-                      placeholder=" ******* "
-                      label="Password"
-                      size="lg"
-                      icon={<TbPasswordFingerprint />}
-                      type="password"
-                      value={signinPassword}
-                      onChange={(e) => setSigninPassword(e.target.value)}
-                      containerProps={{ className: "mt-4" }}
+                  <div className="my-3 w-full">
+                    <InputComp
+                      inputType="password"
+                      inputValue={signinPassword}
+                      inputOnChange={(e) => setSigninPassword(e.target.value)}
+                      inputPlaceHolder=" ******* "
                     />
                   </div>
                   <Button
                     size="lg"
-                    className="bg-secondary"
+                    className="bg-secondary dark:bg-darkPrimary dark:text-darkSecondary"
                     onClick={signinUser}
                   >
-                    Signin
+                    {t("signin")}
                   </Button>
                 </form>
               </TabPanel>
@@ -201,7 +199,7 @@ export default function SignupLoginFormPage() {
           </Tabs>
         </CardBody>
       </Card>
-      <FloatBtnComp/>
+      <FloatBtnComp />
     </div>
   );
 }

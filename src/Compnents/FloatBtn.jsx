@@ -9,7 +9,7 @@ function FloatBtnComp({ clickOnFloatBtn }) {
   const content = <SocialShareComp url={shareUrl} title={shareTitle} />;
 
   return (
-    <Popover content={content} trigger="click">
+    <Popover content={content} trigger="click" className="dark:bg-[#444444]">
       <FloatButton
         style={{
           position: "fixed",
@@ -18,7 +18,7 @@ function FloatBtnComp({ clickOnFloatBtn }) {
           zIndex: 1000,
         }}
         onClick={clickOnFloatBtn}
-        icon={<MdShare />}
+        icon={<MdShare className="dark:text-darkSecondary" />}
       />
     </Popover>
   );

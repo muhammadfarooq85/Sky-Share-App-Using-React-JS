@@ -1,11 +1,7 @@
-import { Input } from "antd";
 const { TextArea } = Input;
+import { Input } from "antd";
 
-function TextAreaComp({
-  textAreaPlaceHolder,
-  textValue,
-  setTextValue,
-}) {
+function TextAreaComp({ textAreaPlaceHolder, textValue, setTextValue }) {
   return (
     <div>
       <TextArea
@@ -13,8 +9,9 @@ function TextAreaComp({
         value={textValue}
         onChange={(e) => setTextValue(e.target.value)}
         placeholder={textAreaPlaceHolder}
-        className="textAreaShare text-4xl border border-none w-full overflow-hidden"
+        className="textAreaShare dark:bg-darkPrimary dark:text-darkSecondary text-4xl border border-none w-full overflow-hidden"
         autoSize
+        allowClear
       />
     </div>
   );

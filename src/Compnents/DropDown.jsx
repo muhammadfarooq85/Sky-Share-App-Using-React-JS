@@ -1,6 +1,10 @@
 import { Select } from "antd";
+import { useTranslation } from "react-i18next";
+import "../config/i18Next";
 
 function DropDownComp({ selectedField, setSelectedField }) {
+  const { t } = useTranslation();
+
   return (
     <Select
       showSearch
@@ -8,7 +12,7 @@ function DropDownComp({ selectedField, setSelectedField }) {
       className="w-full"
       value={selectedField || undefined}
       onChange={(value) => setSelectedField(value)}
-      placeholder="Select field"
+      placeholder={t("selectField")}
       filterOption={(input, option) =>
         (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
       }

@@ -9,6 +9,10 @@ import toast from "react-hot-toast";
 import { SiNamecheap } from "react-icons/si";
 import ButtonComp from "../Button";
 import FloatBtnComp from "../FloatBtn";
+import InputComp from "../Input";
+import { useTranslation } from "react-i18next";
+import "../../config/i18Next";
+import { emailRegex } from "./LoginSignup";
 
 function FeedbackPage() {
   const [colorRate, setColorRate] = useState(Array(5).fill(""));
@@ -17,8 +21,7 @@ function FeedbackPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [response, setResponse] = useState("");
-
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const { t } = useTranslation();
 
   const handleFeedback = async () => {
     if (!name) {
@@ -80,11 +83,11 @@ function FeedbackPage() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
-      <h1 className="text-4xl font-bold text-center">Feedback Form</h1>
+    <div className="flex flex-col justify-center items-center min-h-screen dark:bg-darkPrimary dark:text-darkSecondary">
+      <h1 className="text-4xl font-bold text-center">{t("feedbackForm")}</h1>
       <div className="flex flex-col justify-center items-center w-[50%] gap-4 mt-6">
-        <p className="text-xl">Please Share your opinion.</p>
-        <p className="text-lg font-semibold">Rate our services</p>
+        <p className="text-xl">{t("shareOpinion")}</p>
+        <p className="text-lg font-semibold">{t("rateServices")}</p>
         <div className="flex justify-center items-center">
           {colorRate.map((color, index) => (
             <RiStarSLine
@@ -95,20 +98,22 @@ function FeedbackPage() {
             />
           ))}
         </div>
-        <p className="text-lg font-semibold">Which field can be improved?</p>
-        <Input
-          size="large"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Enter name"
-          addonAfter={<SiNamecheap />}
+        <p className="text-lg font-semibold">{t("whichImproved")}</p>
+        <InputComp
+          inputType="text"
+          inputValue={name}
+          inputOnChange={(e) => setName(e.target.value)}
+          inputPlaceHolder={t("enterName")}
+          inputAddonAfter={<SiNamecheap className="dark:text-darkSecondary" />}
         />
-        <Input
-          size="large"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter Email"
-          addonAfter={<MdOutlineAttachEmail />}
+        <InputComp
+          inputType="email"
+          inputValue={email}
+          inputOnChange={(e) => setEmail(e.target.value)}
+          inputPlaceHolder={t("name@gmail.com")}
+          inputAddonAfter={
+            <MdOutlineAttachEmail className="dark:text-darkSecondary" />
+          }
         />
         <DropDownComp
           selectedField={selectedField}
@@ -118,10 +123,9 @@ function FeedbackPage() {
           size="large"
           value={aboutSelectedField}
           onChange={(e) => setAboutSelectedField(e.target.value)}
-          placeholder="Write about the field here..."
+          placeholder={t("aboutField")}
           autoSize
         />
-
         <ButtonComp
           btnIcon={<MdSend />}
           clickOnUniversalBtn={handleFeedback}

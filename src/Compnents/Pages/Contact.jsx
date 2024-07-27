@@ -1,28 +1,31 @@
-import { MdOutlineAttachEmail, MdPhone, MdLocationOn } from "react-icons/md";
+import { MdOutlineAttachEmail, MdLocationOn } from "react-icons/md";
 import { SlSocialStumbleupon } from "react-icons/sl";
 import FloatBtnComp from "../FloatBtn";
+import { useTranslation } from "react-i18next";
+import "../../config/i18Next";
 
 function ContactPage() {
+  const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h3 className="text-center text-4xl font-bold mb-10">Contact Us</h3>
+    <div className="flex flex-col items-center justify-center min-h-screen dark:bg-darkPrimary dark:text-darkSecondary">
+      <h3 className="text-center text-4xl font-bold mb-10">{t("contactUs")}</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
-        <div className="flex flex-col justify-center items-center gap-2 bg-white p-6 rounded-2xl shadow-md">
+        <div className="flex flex-col justify-center items-center gap-2 bg-white p-6 rounded-2xl shadow-md dark:bg-darkSecondary dark:text-darkPrimary  ">
           <MdOutlineAttachEmail size={60} />
-          <h4 className="text-2xl ">Email</h4>
+          <h4 className="text-2xl ">{t("email")}</h4>
           <p className="text-xl text-center contactEmail">
             famuhammd907@gmail.com
           </p>
         </div>
-        <div className="flex flex-col justify-center items-center gap-2 bg-white p-6 rounded-2xl shadow-md">
+        <div className="flex flex-col justify-center items-center gap-2 bg-white p-6 rounded-2xl shadow-md dark:bg-darkSecondary dark:text-darkPrimary">
           <MdLocationOn size={60} />
-          <h4 className="text-2xl">Location</h4>
-          <p className="text-xl text-center">Pakistan, Punjab, Arifwala</p>
+          <h4 className="text-2xl">{t("location")}</h4>
+          <p className="text-xl text-center">{t("myLocation")}</p>
         </div>
-        <div className="flex flex-col justify-center items-center gap-2 bg-white p-6 rounded-2xl shadow-md">
+        <div className="flex flex-col justify-center items-center gap-2 bg-white p-6 rounded-2xl shadow-md dark:bg-darkSecondary dark:text-darkPrimary">
           <SlSocialStumbleupon size={60} />
-          <h4 className="text-2xl">Social Platforms</h4>
-          <p className="text-xl text-center">Facebook, LinkedIn, Github</p>
+          <h4 className="text-2xl">{t("socialPlatforms")}</h4>
+          <p className="text-xl text-center">{t("mySocial")}</p>
         </div>
       </div>
       <FloatBtnComp />

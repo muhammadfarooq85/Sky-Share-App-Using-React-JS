@@ -2,46 +2,51 @@ import { ReactTyped } from "react-typed";
 import { SiSkyrock } from "react-icons/si";
 import ButtonComp from "../Button";
 import { MdOutlineRestartAlt } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 import FloatBtnComp from "../FloatBtn";
+import "../../config/i18Next";
 
 function SkySharePage() {
+  const { t } = useTranslation();
+
   return (
     <div className="mainWelcome">
-      <div className="welocmeCnt flex flex-col justify-center items-center gap-3 min-h-screen">
-        <SiSkyrock className="text-[#846ea7] w-24 h-24" />
-        <h2 className="text-3xl font-medium text-center">Hy! Everyone👋</h2>
-        <h2 className="text-4xl font-medium text-center">
-          Welcome to Sky Share
+      <div className="welocmeCnt flex flex-col justify-center items-center gap-3 min-h-screen dark:bg-darkPrimary dark:text-darkSecondary">
+        <SiSkyrock className="text-[#846ea7] w-24 h-24 dark:text-darkSecondary" />
+        <h2 className="text-3xl font-medium text-center">{t("HyEveryone")}</h2>
+        <h2 className="text-4xl font-medium text-center ">
+          {t("WelcometoSkyShare")}
         </h2>
         <ReactTyped
-          className="text-4xl font-bold text-center"
-          strings={["What will you explore here?"]}
+          className="text-4xl font-bold text-center "
+          strings={[t("Whatwillyouexplorehere")]}
         />
         <ReactTyped
-          className="text-5xl typingEffectInput"
+          className="text-5xl typingEffectInput "
           strings={[
-            "Explore Texts",
-            "Explore Files",
-            "Explore Download",
-            "Explore Working",
-            "Explore Feedback",
-            "Explore Contact",
+            t("exploreText"),
+            t("exploreFiles"),
+            t("exploreDownload"),
+            t("exploreWorking"),
+            t("exploreFeedback"),
+            t("exploreContact"),
+            t("exploreAccount"),
           ]}
           typeSpeed={60}
           backSpeed={60}
           attr="placeholder"
           loop
         >
-          <input type="text" className=" bg-[#fff] text-center" disabled />
+          <input
+            type="text"
+            className=" bg-[#fff] dark:bg-darkPrimary text-center"
+            disabled
+          />
         </ReactTyped>
-
-        <p className="text-2xl text-center">
-          Let's start a quick tour of Sky share and we will have <br /> you up
-          and runing in no time.
-        </p>
+        <p className="text-2xl text-center">{t("Letsstart")}</p>
         <div className="tourBtn">
           <ButtonComp
-            title="Let's Explore"
+            title={t("LetsExplore")}
             btnIcon={<MdOutlineRestartAlt size={25} />}
           />
         </div>

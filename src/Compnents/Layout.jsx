@@ -5,7 +5,6 @@ import { GrWorkshop } from "react-icons/gr";
 import { VscDesktopDownload, VscFeedback } from "react-icons/vsc";
 import { RiContactsBook3Line } from "react-icons/ri";
 import { SiSkyrock } from "react-icons/si";
-import { MdLogin } from "react-icons/md";
 import { LuScrollText } from "react-icons/lu";
 import { FaRegFileImage } from "react-icons/fa6";
 import SkySharePage from "./Pages/SkyShare";
@@ -17,6 +16,10 @@ import DownloadPage from "./Pages/Download";
 import HowItWorksPage from "./Pages/HowItWorks";
 import SignupLoginFormPage from "./Pages/LoginSignup";
 import ThemeToggleComp from "./ThemeToggle";
+import LanguageToggleBtnComp from "./LanguageToggleBtn";
+import { useTranslation } from "react-i18next";
+import { BiSolidUserAccount } from "react-icons/bi";
+import "../config/i18Next";
 
 function getItem(label, key, icon, children) {
   return {
@@ -27,28 +30,29 @@ function getItem(label, key, icon, children) {
   };
 }
 
-const items = [
-  getItem("Sky Share", "1", <SiSkyrock />),
-  getItem("Share Text", "2", <LuScrollText />),
-  getItem("Share Files", "3", <FaRegFileImage />),
-  getItem("How it Works", "4", <GrWorkshop />),
-  getItem("Download", "5", <VscDesktopDownload />),
-  getItem("Feedback", "6", <VscFeedback />),
-  getItem("Contact Us", "7", <RiContactsBook3Line />),
-  getItem("Login/Signup", "8", <MdLogin />),
-];
-
 const LayoutComp = () => {
+  const { t } = useTranslation();
+  const items = [
+    getItem(t("menu1"), "1", <SiSkyrock />), //Key is menu 1
+    getItem(t("menu2"), "2", <LuScrollText />), //Key is menu
+    getItem(t("menu3"), "3", <FaRegFileImage />), //Key is menu 1
+    getItem(t("menu4"), "4", <GrWorkshop />), //Key is menu 1
+    getItem(t("menu5"), "5", <VscDesktopDownload />), //Key is menu 1
+    getItem(t("menu6"), "6", <VscFeedback />), //Key is menu 1
+    getItem(t("menu7"), "7", <RiContactsBook3Line />), //Key is menu 1
+    getItem(t("menu8"), "8", <BiSolidUserAccount />), //Key is menu 1
+  ];
+
   const [collapsed, setCollapsed] = useState(true);
-  const [breadcrumb, setBreadcrumb] = useState(["Home", items[0].label]);
+  const [breadcrumb, setBreadcrumb] = useState([t("home"), items[0].label]);
   const [selectedMenuItem, setSelectedMenuItem] = useState("1");
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { borderRadiusLG },
   } = theme.useToken();
 
   const handleMenuClick = ({ key }) => {
     const selectedItem = items.find((item) => item.key === key);
-    setBreadcrumb(["Home", selectedItem.label]);
+    setBreadcrumb([t("home"), selectedItem.label]);
     setSelectedMenuItem(key);
   };
 
@@ -118,8 +122,8 @@ const LayoutComp = () => {
         width="170px"
         className="layoutTrigger"
         collapsed={collapsed}
-        breakpoint="sm"
         onCollapse={(value) => setCollapsed(value)}
+        breakpoint="sm"
       >
         <Menu
           className="layoutMenu"
@@ -130,29 +134,37 @@ const LayoutComp = () => {
           onClick={handleMenuClick}
         />
       </Sider>
-      <Layout>
+      <Layout className="dark:bg-darkPrimary">
         <Content
           style={{
             margin: "0 16px",
           }}
         >
-          <div className="flex justify-between items-center"> 
+          <div className="breadCrumbDiv flex justify-between items-center">
             <Breadcrumb
+              className="dark:text-darkSecondary"
               style={{
                 margin: "16px 0",
               }}
             >
               {breadcrumb.map((crumb, index) => (
-                <Breadcrumb.Item key={index}>{crumb}</Breadcrumb.Item>
+                <Breadcrumb.Item
+                  key={index}
+                  className="dark:text-darkSecondary"
+                >
+                  {crumb}
+                </Breadcrumb.Item>
               ))}
             </Breadcrumb>
-            <ThemeToggleComp />
+            <div className="flex justify-center items-center ">
+              <ThemeToggleComp />
+              <LanguageToggleBtnComp />
+            </div>
           </div>
           <div
+            className="bg-[#fff] dark:bg-darkPrimary p-6"
             style={{
-              padding: 24,
               minHeight: 620,
-              background: colorBgContainer,
               borderRadius: borderRadiusLG,
             }}
           >
@@ -164,8 +176,8 @@ const LayoutComp = () => {
             textAlign: "center",
           }}
         >
-          <span className="font-light">
-            This product is created by M. Farooq.
+          <span className="font-light dark:text-darkPrimary">
+            {t("productCreated")}
           </span>
         </Footer>
       </Layout>

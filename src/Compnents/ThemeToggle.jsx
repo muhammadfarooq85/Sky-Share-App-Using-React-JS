@@ -1,5 +1,3 @@
-// src/ThemeToggle.js
-import React from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useTheme } from "../Context/ThemeContext";
 
@@ -13,11 +11,11 @@ const ThemeToggleComp = () => {
     >
       {theme === "dark" ? (
         <>
-          <MdLightMode className="mr-2 w-6 h-6" />
+          <MdLightMode className="dark:text-darkSecondary mr-2 w-8 h-8" />
         </>
       ) : (
         <>
-          <MdDarkMode className="mr-2 w-6 h-6" />
+          <MdDarkMode className="mr-2 w-8 h-8" />
         </>
       )}
     </button>

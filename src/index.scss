@@ -9,6 +9,8 @@ $bodyBgColor: #f3f3f3;
 $layoutCollapserBgColor: #253552;
 $layoutMenuBgColor: #0d1b2a;
 $layoutIconSize: 25px;
+$darkLayoutColor: #111111;
+$darkLayoutTriggerandselectedMenuBg: #444444;
 
 body {
   background-color: $bodyBgColor !important;
@@ -41,14 +43,34 @@ body.dark {
   background-color: $layoutMenuBgColor !important;
 }
 
+.dark .layoutMenu {
+  background-color: $darkLayoutColor !important;
+}
+
+.dark .layoutTrigger {
+  background-color: $darkLayoutColor !important;
+}
+
 :where(.css-dev-only-do-not-override-1uq9j6g).ant-layout
   .ant-layout-sider-trigger {
   background-color: $layoutCollapserBgColor !important;
 }
 
+.dark
+  :where(.css-dev-only-do-not-override-1uq9j6g).ant-layout
+  .ant-layout-sider-trigger {
+  background-color: $darkLayoutTriggerandselectedMenuBg !important;
+}
+
 :where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-dark
   .ant-menu-item-selected {
   background-color: $layoutCollapserBgColor;
+}
+
+.dark
+  :where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-dark
+  .ant-menu-item-selected {
+  background-color: $darkLayoutTriggerandselectedMenuBg;
 }
 
 :where(.css-dev-only-do-not-override-1uq9j6g).ant-menu
@@ -71,6 +93,20 @@ body.dark {
   padding-top: 4px !important;
 }
 
+:where(.css-dev-only-do-not-override-1uq9j6g).ant-breadcrumb
+  .ant-breadcrumb-separator {
+  @apply dark:text-darkSecondary;
+}
+
+:where(.css-dev-only-do-not-override-1uq9j6g).ant-layout-footer {
+  @apply dark:bg-darkPrimary;
+}
+
+:where(.css-dev-only-do-not-override-1uq9j6g).ant-float-btn-default
+  .ant-float-btn-body {
+  @apply dark:bg-darkPrimary;
+}
+
 //Sky Share Css
 :where(.css-dev-only-do-not-override-1uq9j6g).ant-btn {
   height: 0% !important;
@@ -85,9 +121,9 @@ body.dark {
 }
 
 //Feedback Css
-
 :where(.css-dev-only-do-not-override-1uq9j6g).ant-input-outlined:focus {
   border-color: #6e5c8b !important;
+
   box-shadow: none !important;
 }
 
@@ -129,9 +165,85 @@ body.dark {
 .image-container:hover .image {
   transform: rotateY(15deg) rotateX(15deg); /* Rotate image for 3D effect */
 }
-//TextArea Css
-.textAreaShare:placeholder-shown {
-  @apply text-4xl;
+
+//Text Css
+.dark .textAreaShare::placeholder {
+  @apply dark:text-darkSecondary;
+}
+
+.dark
+  :where(.css-dev-only-do-not-override-1uq9j6g).ant-input-group-wrapper-outlined
+  .ant-input-group-addon {
+  @apply dark:bg-darkPrimary;
+}
+
+//Modal Css
+.dark
+  :where(.css-dev-only-do-not-override-1uq9j6g).ant-modal
+  .ant-modal-content {
+  background-color: $darkLayoutTriggerandselectedMenuBg;
+}
+
+.dark
+  :where(.css-dev-only-do-not-override-1uq9j6g).ant-result
+  .ant-result-subtitle {
+  @apply dark:text-darkSecondary;
+}
+
+//Popover Css
+.dark
+  :where(.css-dev-only-do-not-override-1uq9j6g).ant-popover
+  .ant-popover-inner {
+  background-color: $darkLayoutTriggerandselectedMenuBg;
+}
+
+//Loader Css
+.loader {
+  border-width: 10px !important;
+}
+
+.dark .loader {
+  border-color: white white transparent !important;
+}
+
+// Languge ToogleBtn Css
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#toggle-button {
+  display: none;
+}
+
+.toggle-label {
+  width: 50px;
+  height: 25px;
+  background-color: #263551;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-label .ball {
+  width: 20px;
+  height: 20px;
+  background-color: #f3f3f3;
+  border-radius: 50%;
+  position: absolute;
+  top: 2.5px;
+  left: 2.5px; /* Center the ball on the left side */
+  transition: transform 0.3s;
+}
+
+#toggle-button:checked + .toggle-label {
+  background-color: #8470a3;
+}
+
+#toggle-button:checked + .toggle-label .ball {
+  transform: translateX(25px); /* Adjust this value to match the track width */
 }
 
 //Media Queries
@@ -163,6 +275,9 @@ body.dark {
   .filesModalBtn {
     flex-direction: column !important;
   }
+  .breadCrumbDiv {
+    flex-direction: column;
+  }
 }
 
 @media only screen and (max-width: 320px) {
@@ -170,6 +285,7 @@ body.dark {
     .ant-layout-sider-trigger {
     background-color: $layoutMenuBgColor !important;
   }
+
   .typingEffectInput {
     @apply text-sm;
   }
@@ -183,4 +299,4 @@ body.dark {
   .contactEmail {
     @apply text-lg;
   }
-}
+} 

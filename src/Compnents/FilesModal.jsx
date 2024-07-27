@@ -1,6 +1,6 @@
 import { Modal, Result } from "antd";
 import ButtonComp from "./Button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { ClipLoader } from "react-spinners";
 import {
   databaseRef,
@@ -11,64 +11,53 @@ import {
   storageRef,
   deleteObject,
   listAll,
-  set,
 } from "../config/firebase.config";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { MdDownload, MdFilePresent, MdDelete } from "react-icons/md";
+import { MdDownload, MdFilePresent } from "react-icons/md";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+import "../config/i18Next";
 
-function FilesModalComp({ open, setOpen }) {
+function FilesModalComp({ open, setOpen, userKey, setUserKey, filesPassword }) {
   const [storageFiles, setStorageFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFile, setIsFile] = useState(false);
 
+  const { t } = useTranslation();
   const handleClose = () => {
     setOpen(false);
   };
 
-  useEffect(() => {
+  const fetchFiles = useCallback(async () => {
     setIsLoading(true);
     const starCountRef = databaseRef(database, "sharedFiles");
-    const unsubscribe = onValue(starCountRef, (snapshot) => {
+    onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        setStorageFiles(data.allFiles || []);
-        setIsFile(data.allFiles && data.allFiles.length > 0);
+        for (const key in data) {
+          if (data[key].filesPassword === filesPassword) {
+            setStorageFiles(data[key].allFiles);
+            setIsFile(data[key].allFiles && data[key].allFiles.length > 0);
+            setUserKey(key);
+            setOpen(true);
+          }
+        }
       } else {
         setStorageFiles([]);
         setIsFile(false);
       }
       setIsLoading(false);
     });
+  }, [filesPassword, setOpen, setUserKey]);
 
-    // Clean up subscription
-    return () => unsubscribe();
-  }, [open]);
-
-  const clearAllFiles = async () => {
-    setIsLoading(true);
-    try {
-      const listRef = storageRef(storage, "sharedFiles/");
-      const res = await listAll(listRef);
-
-      const deletePromises = res.items.map((itemRef) => deleteObject(itemRef));
-      await Promise.all(deletePromises);
-
-      // Remove the database entry for sharedFiles
-      await remove(databaseRef(database, "sharedFiles"));
-
-      toast.success("All files deleted successfully.");
-      handleClose();
-    } catch (error) {
-      console.error(error);
-      toast.error("Please try again.");
-    } finally {
-      setIsLoading(false);
+  useEffect(() => {
+    if (filesPassword) {
+      fetchFiles();
     }
-  };
+  }, [filesPassword, fetchFiles]);
 
   const downloadAllFiles = () => {
     setIsLoading(true);
@@ -90,29 +79,26 @@ function FilesModalComp({ open, setOpen }) {
     Promise.all(promises)
       .then(() => zip.generateAsync({ type: "blob" }))
       .then((blob) => saveAs(blob, "MULTIPLE-FILES.zip"))
-      .catch((e) => toast.error("An error occurred while downloading files."))
+      .catch(() => toast.error("An error occurred while downloading files."))
       .finally(() => setIsLoading(false));
   };
 
-  const selctedFileRemove = async (index) => {
+  const clearAllFiles = async () => {
     setIsLoading(true);
     try {
-      const selectedFileRef = storageRef(storage, `sharedFiles/${index}`);
-      await deleteObject(selectedFileRef);
+      const listRef = storageRef(storage, `sharedFiles/${filesPassword}`);
+      const res = await listAll(listRef);
 
-      const starCountRef = databaseRef(database, "sharedFiles");
-      const snapshot = await get(starCountRef);
-      const data = snapshot.val();
-      if (data) {
-        let allFiles = data.allFiles || [];
-        allFiles.splice(index, 1);
-        await set(databaseRef(database, "sharedFiles"), {
-          allFiles: allFiles,
-        });
-        setStorageFiles(allFiles);
-        toast.success("Selected File deleted successfully.");
-      }
+      const deletePromises = res.items.map((itemRef) => deleteObject(itemRef));
+      await Promise.all(deletePromises);
+
+      // Remove the database entry for sharedFiles
+      await remove(databaseRef(database, `sharedFiles/${userKey}`));
+
+      toast.success("All files deleted successfully.");
+      handleClose();
     } catch (error) {
+      console.error(error);
       toast.error("Please try again.");
     } finally {
       setIsLoading(false);
@@ -133,24 +119,27 @@ function FilesModalComp({ open, setOpen }) {
               <div className="filesModalBtn flex justify-end items-center gap-2">
                 <ButtonComp clickOnUniversalBtn={handleClose} title="Cancel" />
                 <ButtonComp
-                  title="Clear All"
+                  title={t("clearAll")}
                   clickOnUniversalBtn={clearAllFiles}
                 />
                 <ButtonComp
-                  title="Download All"
+                  title={t("downloadAll")}
                   btnIcon={<MdDownload />}
                   clickOnUniversalBtn={downloadAllFiles}
                 />
               </div>
             ) : (
-              <ButtonComp clickOnUniversalBtn={handleClose} title="Cancel" />
+              <ButtonComp
+                clickOnUniversalBtn={handleClose}
+                title={t("cancel")}
+              />
             )}
           </div>,
         ]}
       >
         {isLoading ? (
           <div className="flex flex-col justify-center items-center">
-            <ClipLoader size={100} />
+            <ClipLoader className="loader" size={100} />
           </div>
         ) : !isFile ? (
           <Result status="500" subTitle="Sorry, Files are not uploaded yet." />
@@ -160,15 +149,10 @@ function FilesModalComp({ open, setOpen }) {
               const { name, type, URL } = storageFile;
               return (
                 <div
-                  className="relative flex flex-col justify-center items-center gap-2"
+                  className="flex flex-col justify-center items-center gap-2"
                   key={index}
                   style={{ width: "50%" }}
                 >
-                  <MdDelete
-                    className="z-50 cursor-pointer absolute text-red-600 top-1 right-1"
-                    size={30}
-                    onClick={() => selctedFileRemove(index)}
-                  />
                   {type.startsWith("image/") ? (
                     <div className="flex flex-col justify-center items-center w-full">
                       <LazyLoadImage

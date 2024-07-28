@@ -163,7 +163,7 @@ const LayoutComp = () => {
               <ThemeToggleComp />
               <LanguageToggleBtnComp />
               <Avatar className="bg-primary">
-                {user ? userName.slice(0, 1).toUpperCase() : "U"}
+                {userName !== null ? userName.slice(0, 1).toUpperCase() : "U"}
               </Avatar>
             </div>
           </div>

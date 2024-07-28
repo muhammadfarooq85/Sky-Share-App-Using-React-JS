@@ -3,8 +3,8 @@ import { MdShare } from "react-icons/md";
 import SocialShareComp from "./SocialShare";
 
 function FloatBtnComp({ clickOnFloatBtn }) {
-  const shareUrl = "https://yourwebsite.com";
-  const shareTitle = "Check out this awesome website!";
+  const shareUrl = "https://sky-share.vercel.app/";
+  const shareTitle = "A free and easy tool for sharing files and text online!";
 
   const content = <SocialShareComp url={shareUrl} title={shareTitle} />;
 

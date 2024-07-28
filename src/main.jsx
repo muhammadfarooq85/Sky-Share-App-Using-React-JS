@@ -5,6 +5,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 import "./index.scss";
 import { ThemeProviderContext } from "./Context/ThemeContext.jsx";
 import { registerSW } from "virtual:pwa-register";
+import { UserContextProvider } from "./Context/UserContext.jsx";
 
 const updateSW = registerSW({
   onNeedRefresh() {},
@@ -13,10 +14,12 @@ const updateSW = registerSW({
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <ThemeProviderContext>
-        <App />
-      </ThemeProviderContext>
-    </ThemeProvider>
+    <UserContextProvider>
+      <ThemeProvider>
+        <ThemeProviderContext>
+          <App />
+        </ThemeProviderContext>
+      </ThemeProvider>
+    </UserContextProvider>
   </React.StrictMode>
 );

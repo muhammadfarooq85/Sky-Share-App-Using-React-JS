@@ -15,7 +15,6 @@ import "../../config/i18Next";
 import TextAreaComp from "../TextArea";
 import ButtonComp from "../Button";
 import InputComp from "../Input";
-import { TbPasswordFingerprint } from "react-icons/tb";
 import { passwordRegex } from "./LoginSignup";
 
 function TextsPage() {
@@ -34,6 +33,7 @@ function TextsPage() {
       if (data) {
         for (const key in data) {
           if (data[key].textPassword === textPassword) {
+            toast.success("Text decrypted successfuly.");
             setTextValue(data[key].textValue);
             setUserKey(key);
             setIsText(true);
@@ -114,7 +114,7 @@ function TextsPage() {
             inputType="password"
             inputValue={textPassword}
             inputOnChange={(e) => setTextPasssword(e.target.value)}
-            inputPlaceHolder=" ****** " 
+            inputPlaceHolder=" ****** "
           />
         </div>
       </div>

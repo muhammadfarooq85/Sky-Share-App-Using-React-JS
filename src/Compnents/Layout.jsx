@@ -1,6 +1,6 @@
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Layout, Menu, theme, Avatar } from "antd";
 const { Content, Footer, Sider } = Layout;
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { GrWorkshop } from "react-icons/gr";
 import { VscDesktopDownload, VscFeedback } from "react-icons/vsc";
 import { RiContactsBook3Line } from "react-icons/ri";
@@ -20,6 +20,7 @@ import LanguageToggleBtnComp from "./LanguageToggleBtn";
 import { useTranslation } from "react-i18next";
 import { BiSolidUserAccount } from "react-icons/bi";
 import "../config/i18Next";
+import { UserContext } from "../Context/UserContext";
 
 function getItem(label, key, icon, children) {
   return {
@@ -33,15 +34,17 @@ function getItem(label, key, icon, children) {
 const LayoutComp = () => {
   const { t } = useTranslation();
   const items = [
-    getItem(t("menu1"), "1", <SiSkyrock />), //Key is menu 1
-    getItem(t("menu2"), "2", <LuScrollText />), //Key is menu
-    getItem(t("menu3"), "3", <FaRegFileImage />), //Key is menu 1
-    getItem(t("menu4"), "4", <GrWorkshop />), //Key is menu 1
-    getItem(t("menu5"), "5", <VscDesktopDownload />), //Key is menu 1
-    getItem(t("menu6"), "6", <VscFeedback />), //Key is menu 1
-    getItem(t("menu7"), "7", <RiContactsBook3Line />), //Key is menu 1
-    getItem(t("menu8"), "8", <BiSolidUserAccount />), //Key is menu 1
+    getItem(t("menu1"), "1", <SiSkyrock />),
+    getItem(t("menu2"), "2", <LuScrollText />),
+    getItem(t("menu3"), "3", <FaRegFileImage />),
+    getItem(t("menu4"), "4", <GrWorkshop />),
+    getItem(t("menu5"), "5", <VscDesktopDownload />),
+    getItem(t("menu6"), "6", <VscFeedback />),
+    getItem(t("menu7"), "7", <RiContactsBook3Line />),
+    getItem(t("menu8"), "8", <BiSolidUserAccount />),
   ];
+
+  const { user, userUid, userName } = useContext(UserContext);
 
   const [collapsed, setCollapsed] = useState(true);
   const [breadcrumb, setBreadcrumb] = useState([t("home"), items[0].label]);
@@ -140,7 +143,7 @@ const LayoutComp = () => {
             margin: "0 16px",
           }}
         >
-          <div className="breadCrumbDiv flex justify-between items-center">
+          <div className="breadCrumbDiv flex justify-between items-center ">
             <Breadcrumb
               className="dark:text-darkSecondary"
               style={{
@@ -156,9 +159,12 @@ const LayoutComp = () => {
                 </Breadcrumb.Item>
               ))}
             </Breadcrumb>
-            <div className="flex justify-center items-center ">
+            <div className="flex justify-center items-center gap-4">
               <ThemeToggleComp />
               <LanguageToggleBtnComp />
+              <Avatar className="bg-primary">
+                {user ? userName.slice(0, 1).toUpperCase() : "U"}
+              </Avatar>
             </div>
           </div>
           <div

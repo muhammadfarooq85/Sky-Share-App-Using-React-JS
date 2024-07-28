@@ -7,15 +7,15 @@ const ThemeToggleComp = () => {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded flex items-center"
+      className="rounded flex items-center"
     >
       {theme === "dark" ? (
         <>
-          <MdLightMode className="dark:text-darkSecondary mr-2 w-8 h-8" />
+          <MdLightMode className="dark:text-darkSecondary w-8 h-8" />
         </>
       ) : (
         <>
-          <MdDarkMode className="mr-2 w-8 h-8" />
+          <MdDarkMode className="w-8 h-8" />
         </>
       )}
     </button>

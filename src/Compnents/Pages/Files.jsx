@@ -19,7 +19,6 @@ import FilesModalComp from "../FilesModal";
 import FloatBtnComp from "../FloatBtn";
 import { useTranslation } from "react-i18next";
 import InputComp from "../Input";
-import { TbPasswordFingerprint } from "react-icons/tb";
 import "../../config/i18Next";
 import { passwordRegex } from "./LoginSignup";
 

@@ -17,7 +17,7 @@ const resources = {
       home: "Home",
       HyEveryone: "Hy! Everyone 👋",
       WelcometoSkyShare: "Welcome to Sky Share",
-      Whatwillyouexplorehere: "What will you explore here?|",
+      Whatwillyouexplorehere: "What will you explore here?",
       Letsstart: `Let's start a quick tour of Sky share and we will have
       you up and runing in no time.`,
       LetsExplore: "Let's Explore",
@@ -37,10 +37,11 @@ const resources = {
       addFiles: "Add Files or",
       noteFiles: `Note:- If you want to decrypt shared files. Please provide the password.
       Our system will automatically detect your password.`,
-      noteTexts:` Note:- If you want to decrypt shared text. Please provide password.
+      noteTexts: ` Note:- If you want to decrypt shared text. Please provide password.
       Our system will autmatically detect your password.`,
       drag: "drag and drop",
       cancel: "Cancel",
+      signupGoogle: "Signup With Google",
       downloadAll: "Download All",
       clearAll: "Clear All",
       howItworks: "How it works?",
@@ -103,13 +104,14 @@ const resources = {
       exploreWorking: "کام کو دریافت کریں۔",
       textAreaPlaceHolder: "وہ متن ٹائپ کریں جسے آپ شیئر کرنا چاہتے ہیں...",
       save: "محفوظ کریں۔",
+      signupGoogle: "گوگل کے ساتھ سائن اپ کریں۔",
       clear: "صاف",
       copy: "کاپی",
       deleteAll: "تمام حذف کریں",
       viewfiles: "ویو فائلز",
       addFiles: "فائلیں شامل کریں",
-      noteFiles:`نوٹ:- اگر آپ مشترکہ فائلوں کو ڈیکرپٹ کرنا چاہتے ہیں۔ براہ کرم پاس ورڈ فراہم کریں۔ ہمارا سسٹم خود بخود آپ کے پاس ورڈ کا پتہ لگائے گا۔`,
-      noteTexts:`نوٹ:- اگر آپ مشترکہ متن کو ڈیکرپٹ کرنا چاہتے ہیں۔ براہ کرم پاس ورڈ فراہم کریں۔
+      noteFiles: `نوٹ:- اگر آپ مشترکہ فائلوں کو ڈیکرپٹ کرنا چاہتے ہیں۔ براہ کرم پاس ورڈ فراہم کریں۔ ہمارا سسٹم خود بخود آپ کے پاس ورڈ کا پتہ لگائے گا۔`,
+      noteTexts: `نوٹ:- اگر آپ مشترکہ متن کو ڈیکرپٹ کرنا چاہتے ہیں۔ براہ کرم پاس ورڈ فراہم کریں۔
       ہمارا سسٹم خودکار طور پر آپ کے پاس ورڈ کا پتہ لگائے گا۔`,
       drag: " یا ڈریگ ڈراپ کریں۔",
       cancel: "منسوخ کریں",

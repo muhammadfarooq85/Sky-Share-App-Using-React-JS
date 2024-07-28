@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input, Button } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons"; 
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 function InputComp({
   inputValue,
@@ -31,7 +31,13 @@ function InputComp({
       addonAfter={
         inputType === "password" ? (
           <Button
-            icon={passwordVisible ? <EyeTwoTone /> : <EyeInvisibleOutlined />}
+            icon={
+              passwordVisible ? (
+                <EyeTwoTone className="dark:text-darkSecondary" />
+              ) : (
+                <EyeInvisibleOutlined className="dark:text-darkSecondary" />
+              )
+            }
             onClick={togglePasswordVisibility}
             type="text"
           />

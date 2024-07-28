@@ -39,6 +39,7 @@ function FilesModalComp({ open, setOpen, userKey, setUserKey, filesPassword }) {
       if (data) {
         for (const key in data) {
           if (data[key].filesPassword === filesPassword) {
+            toast.success("Files decrypted successfuly.");
             setStorageFiles(data[key].allFiles);
             setIsFile(data[key].allFiles && data[key].allFiles.length > 0);
             setUserKey(key);

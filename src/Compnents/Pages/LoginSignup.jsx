@@ -27,6 +27,7 @@ import FloatBtnComp from "../FloatBtn";
 import InputComp from "../Input";
 import { useTranslation } from "react-i18next";
 import "../../config/i18Next";
+import ForgotPasswordModalComp from "../ForgotPasswordModal";
 import ButtonComp from "../Button";
 
 export let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -39,7 +40,12 @@ export default function SignupLoginFormPage() {
   const [signupPassword, setSignupPassword] = useState("");
   const [signinEmail, setSigninEmail] = useState("");
   const [signinPassword, setSigninPassword] = useState("");
+  const [open, setOpen] = useState(false);
   const { t } = useTranslation();
+
+  const handleForgotModal = () => {
+    setOpen(true);
+  };
 
   //Registering  with emai land password
   const registerUser = async () => {
@@ -209,12 +215,16 @@ export default function SignupLoginFormPage() {
                   >
                     {t("signin")}
                   </Button>
+                  <a className="text-red-600" onClick={handleForgotModal}>
+                    {t("resetPassword")}
+                  </a>
                 </form>
               </TabPanel>
             </TabsBody>
           </Tabs>
         </CardBody>
       </Card>
+      <ForgotPasswordModalComp open={open} setOpen={setOpen} />
       <FloatBtnComp />
     </div>
   );

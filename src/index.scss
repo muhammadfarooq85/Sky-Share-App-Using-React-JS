@@ -246,6 +246,29 @@ body.dark {
   transform: translateX(25px); /* Adjust this value to match the track width */
 }
 
+.dark
+  :where(.css-dev-only-do-not-override-1uq9j6g).ant-drawer
+  .ant-drawer-body {
+  background-color: #011528 !important;
+}
+
+.dark
+  :where(.css-dev-only-do-not-override-1uq9j6g).ant-drawer
+  .ant-drawer-header {
+  background-color: #011528 !important;
+  color: white !important;
+}
+
+.dark
+  :where(.css-dev-only-do-not-override-1uq9j6g).ant-drawer
+  .ant-drawer-close {
+  color: white !important;
+}
+
+.dark :where(.css-dev-only-do-not-override-1uq9j6g).ant-layout {
+  background-color: $darkLayoutColor !important;
+}
+
 //Media Queries
 @media only screen and (max-width: 750px) {
   .typingEffectInput {
@@ -298,5 +321,27 @@ body.dark {
 
   .contactEmail {
     @apply text-lg;
+  }
+}
+
+@media (max-width: 768px) {
+  .layoutTrigger {
+    display: none;
+  }
+
+  .drawerButton {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .drawerButton {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .breadCrumbRight {
+    padding: 0px 0px 20px 0px;
   }
 }

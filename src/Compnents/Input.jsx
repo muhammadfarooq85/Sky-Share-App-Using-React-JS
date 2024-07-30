@@ -8,6 +8,7 @@ function InputComp({
   inputPlaceHolder,
   inputAddonAfter,
   inputType,
+  inputDisabled,
 }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -28,6 +29,7 @@ function InputComp({
       value={inputValue}
       onChange={inputOnChange}
       placeholder={inputPlaceHolder}
+      disabled={inputDisabled}
       addonAfter={
         inputType === "password" ? (
           <Button

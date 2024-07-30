@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout, Menu, theme, Avatar } from "antd";
+import { Breadcrumb, Layout, Menu, theme, Avatar, Drawer, Button } from "antd";
 const { Content, Footer, Sider } = Layout;
 import { useState, useContext } from "react";
 import { GrWorkshop } from "react-icons/gr";
@@ -15,12 +15,15 @@ import ContactPage from "./Pages/Contact";
 import DownloadPage from "./Pages/Download";
 import HowItWorksPage from "./Pages/HowItWorks";
 import SignupLoginFormPage from "./Pages/LoginSignup";
+import SettingsPage from "./Pages/Settings";
 import ThemeToggleComp from "./ThemeToggle";
 import LanguageToggleBtnComp from "./LanguageToggleBtn";
 import { useTranslation } from "react-i18next";
+import { MdSettings, MdMenu } from "react-icons/md";
 import { BiSolidUserAccount } from "react-icons/bi";
 import "../config/i18Next";
 import { UserContext } from "../Context/UserContext";
+import ButtonComp from "./Button";
 
 function getItem(label, key, icon, children) {
   return {
@@ -42,13 +45,16 @@ const LayoutComp = () => {
     getItem(t("menu6"), "6", <VscFeedback />),
     getItem(t("menu7"), "7", <RiContactsBook3Line />),
     getItem(t("menu8"), "8", <BiSolidUserAccount />),
+    getItem(t("menu9"), "9", <MdSettings />),
   ];
 
-  const { user, userUid, userName } = useContext(UserContext);
+  const { user, userName } = useContext(UserContext);
 
   const [collapsed, setCollapsed] = useState(true);
   const [breadcrumb, setBreadcrumb] = useState([t("home"), items[0].label]);
   const [selectedMenuItem, setSelectedMenuItem] = useState("1");
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
   const {
     token: { borderRadiusLG },
   } = theme.useToken();
@@ -57,57 +63,34 @@ const LayoutComp = () => {
     const selectedItem = items.find((item) => item.key === key);
     setBreadcrumb([t("home"), selectedItem.label]);
     setSelectedMenuItem(key);
+    if (window.innerWidth <= 500) {
+      setDrawerVisible(false); // Close drawer on menu item click for small screens
+    }
   };
 
   const renderContent = () => {
     switch (selectedMenuItem) {
       case "1":
-        return (
-          <>
-            <SkySharePage />
-          </>
-        );
+        return <SkySharePage />;
       case "2":
-        return (
-          <>
-            <TextsPage />
-          </>
-        );
+        return <TextsPage />;
       case "3":
-        return (
-          <>
-            <FilesPage />
-          </>
-        );
+        return <FilesPage />;
       case "4":
-        return (
-          <>
-            <HowItWorksPage />
-          </>
-        );
+        return <HowItWorksPage />;
       case "5":
-        return (
-          <>
-            <DownloadPage />
-          </>
-        );
+        return <DownloadPage />;
       case "6":
-        return (
-          <>
-            <FeedbackPage />
-          </>
-        );
+        return <FeedbackPage />;
       case "7":
-        return (
-          <>
-            <ContactPage />
-          </>
-        );
+        return <ContactPage />;
       case "8":
-        return (
-          <>
-            <SignupLoginFormPage />
-          </>
+        return <SignupLoginFormPage />;
+      case "9":
+        return user ? (
+          <SettingsPage />
+        ) : (
+          <h1 className="text-4xl font-bold text-center">{t("pleaseLogin")}</h1>
         );
       default:
         return <>Bill is a cat.</>;
@@ -115,11 +98,7 @@ const LayoutComp = () => {
   };
 
   return (
-    <Layout
-      style={{
-        minHeight: "100vh",
-      }}
-    >
+    <Layout style={{ minHeight: "100vh" }}>
       <Sider
         collapsible
         width="170px"
@@ -137,18 +116,31 @@ const LayoutComp = () => {
           onClick={handleMenuClick}
         />
       </Sider>
+      <ButtonComp
+        classes="drawerButton top-3 left-2"
+        btnIcon={<MdMenu />}
+        clickOnUniversalBtn={() => setDrawerVisible(true)}
+      />
+      <Drawer
+        title={t("menu")}
+        placement="left"
+        onClose={() => setDrawerVisible(false)}
+        visible={drawerVisible}
+      >
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+          items={items}
+          onClick={handleMenuClick}
+        />
+      </Drawer>
       <Layout className="dark:bg-darkPrimary">
-        <Content
-          style={{
-            margin: "0 16px",
-          }}
-        >
+        <Content style={{ margin: "0 16px" }}>
           <div className="breadCrumbDiv flex justify-between items-center ">
             <Breadcrumb
               className="dark:text-darkSecondary"
-              style={{
-                margin: "16px 0",
-              }}
+              style={{ margin: "16px 0" }}
             >
               {breadcrumb.map((crumb, index) => (
                 <Breadcrumb.Item
@@ -159,7 +151,7 @@ const LayoutComp = () => {
                 </Breadcrumb.Item>
               ))}
             </Breadcrumb>
-            <div className="flex justify-center items-center gap-4">
+            <div className="flex justify-center items-center gap-4 breadCrumbRight">
               <ThemeToggleComp />
               <LanguageToggleBtnComp />
               <Avatar className="bg-primary">
@@ -169,19 +161,12 @@ const LayoutComp = () => {
           </div>
           <div
             className="bg-[#fff] dark:bg-darkPrimary p-6"
-            style={{
-              minHeight: 620,
-              borderRadius: borderRadiusLG,
-            }}
+            style={{ minHeight: 620, borderRadius: borderRadiusLG }}
           >
             {renderContent()}
           </div>
         </Content>
-        <Footer
-          style={{
-            textAlign: "center",
-          }}
-        >
+        <Footer style={{ textAlign: "center" }}>
           <span className="font-light dark:text-darkPrimary">
             {t("productCreated")}
           </span>

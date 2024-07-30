@@ -61,6 +61,7 @@ function FeedbackPage() {
       });
 
       if (response.ok) {
+        toast.success("Thank you for your feedback!")
         setResponse("Thank you for your feedback!");
         setSelectedField("");
         setAboutSelectedField("");

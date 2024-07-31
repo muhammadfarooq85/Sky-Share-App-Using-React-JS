@@ -25,17 +25,18 @@ body.dark {
 }
 
 //Layout Css
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-inline .ant-menu-item {
+:where(.css-dev-only-do-not-override-1pg9a38).ant-menu-inline .ant-menu-item {
   height: 70px !important;
 }
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-vertical
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-menu-vertical
   > .ant-menu-item {
   height: 70px !important;
 }
 
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-dark
-  .ant-menu-item-selected {
-  line-height: 70px !important;
+:where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-vertical
+  > .ant-menu-item {
+  height: 70px !important;
 }
 
 .layoutTrigger,
@@ -51,37 +52,10 @@ body.dark {
   background-color: $darkLayoutColor !important;
 }
 
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-layout
-  .ant-layout-sider-trigger {
-  background-color: $layoutCollapserBgColor !important;
-}
-
-.dark
-  :where(.css-dev-only-do-not-override-1uq9j6g).ant-layout
-  .ant-layout-sider-trigger {
-  background-color: $darkLayoutTriggerandselectedMenuBg !important;
-}
-
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-dark
-  .ant-menu-item-selected {
-  background-color: $layoutCollapserBgColor;
-}
-
-.dark
-  :where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-dark
-  .ant-menu-item-selected {
-  background-color: $darkLayoutTriggerandselectedMenuBg;
-}
-
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-menu
+:where(.css-dev-only-do-not-override-1pg9a38).ant-menu
   .ant-menu-item
   .ant-menu-item-icon {
-  font-size: $layoutIconSize !important;
-}
-
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-inline-collapsed
-  > .ant-menu-item {
-  padding-inline: calc(44% - 8px - 4px) !important;
+  font-size: $layoutIconSize;
 }
 
 :where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-vertical
@@ -89,22 +63,61 @@ body.dark {
   line-height: 70px !important;
 }
 
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-menu .ant-menu-item {
-  padding-top: 4px !important;
+:where(.css-dev-only-do-not-override-1pg9a38).ant-menu-vertical
+  > .ant-menu-item {
+  line-height: 80px !important;
 }
 
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-breadcrumb
+:where(.css-dev-only-do-not-override-1pg9a38).ant-menu-inline-collapsed
+  > .ant-menu-item {
+  padding-inline: calc(44% - 8px - 4px) !important;
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-breadcrumb
   .ant-breadcrumb-separator {
   @apply dark:text-darkSecondary;
 }
 
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-layout-footer {
+.dark :where(.css-dev-only-do-not-override-1pg9a38).ant-layout-footer {
   @apply dark:bg-darkPrimary;
 }
 
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-float-btn-default
-  .ant-float-btn-body {
-  @apply dark:bg-darkPrimary;
+:where(.css-dev-only-do-not-override-1pg9a38).ant-menu-dark
+  .ant-menu-item-selected {
+  background-color: $layoutCollapserBgColor;
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-layout
+  .ant-layout-sider-trigger {
+  background-color: $layoutCollapserBgColor;
+}
+
+.dark
+  :where(.css-dev-only-do-not-override-1pg9a38).ant-menu-dark
+  .ant-menu-item-selected {
+  background-color: $darkLayoutTriggerandselectedMenuBg;
+}
+
+.dark
+  :where(.css-dev-only-do-not-override-1pg9a38).ant-layout
+  .ant-layout-sider-trigger {
+  background-color: $darkLayoutTriggerandselectedMenuBg;
+}
+
+// Button Css
+:where(.css-dev-only-do-not-override-1pg9a38).ant-btn-default:not(
+    :disabled
+  ):not(.ant-btn-disabled) {
+  border: none !important;
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-btn-default:not(
+    :disabled
+  ):not(.ant-btn-disabled):hover {
+  @apply bg-darkSecondary;
+  border: none !important;
+  transition: background-color ease 1s;
+  color: #111111;
 }
 
 //Sky Share Css
@@ -123,7 +136,6 @@ body.dark {
 //Feedback Css
 :where(.css-dev-only-do-not-override-1uq9j6g).ant-input-outlined:focus {
   border-color: #6e5c8b !important;
-
   box-shadow: none !important;
 }
 
@@ -247,13 +259,13 @@ body.dark {
 }
 
 .dark
-  :where(.css-dev-only-do-not-override-1uq9j6g).ant-drawer
+  :where(.css-dev-only-do-not-override-1pg9a38).ant-drawer
   .ant-drawer-body {
   background-color: #011528 !important;
 }
 
 .dark
-  :where(.css-dev-only-do-not-override-1uq9j6g).ant-drawer
+  :where(.css-dev-only-do-not-override-1pg9a38).ant-drawer
   .ant-drawer-header {
   background-color: #011528 !important;
   color: white !important;
@@ -265,8 +277,17 @@ body.dark {
   color: white !important;
 }
 
-.dark :where(.css-dev-only-do-not-override-1uq9j6g).ant-layout {
-  background-color: $darkLayoutColor !important;
+.dark
+  :where(
+    .css-dev-only-do-not-override-1pg9a38
+  ).ant-layout.ant-layout-has-sider {
+  @apply bg-darkPrimary;
+}
+
+.dark
+  :where(.css-dev-only-do-not-override-1pg9a38).ant-drawer
+  .ant-drawer-close {
+  color: #f3f3f3;
 }
 
 //Media Queries

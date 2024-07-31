@@ -167,7 +167,7 @@ const LayoutComp = () => {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          <span className="font-light dark:text-darkPrimary">
+          <span className="font-light dark:text-darkSecondary">
             {t("productCreated")}
           </span>
         </Footer>

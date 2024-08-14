@@ -49,11 +49,15 @@ const LayoutComp = () => {
   ];
 
   const { user, userName } = useContext(UserContext);
-
   const [collapsed, setCollapsed] = useState(true);
   const [breadcrumb, setBreadcrumb] = useState([t("home"), items[0].label]);
   const [selectedMenuItem, setSelectedMenuItem] = useState("1");
   const [drawerVisible, setDrawerVisible] = useState(false);
+
+  const breadcrumbItems = breadcrumb.map((crumb, index) => ({
+    title: <span className="dark:text-darkSecondary">{crumb}</span>,
+    key: index,
+  }));
 
   const {
     token: { borderRadiusLG },
@@ -118,14 +122,14 @@ const LayoutComp = () => {
       </Sider>
       <ButtonComp
         classes="drawerButton top-3 left-2"
-        btnIcon={<MdMenu />}
+        btnIcon={<MdMenu className="w-6 h-6" />}
         clickOnUniversalBtn={() => setDrawerVisible(true)}
       />
       <Drawer
         title={t("menu")}
         placement="left"
         onClose={() => setDrawerVisible(false)}
-        visible={drawerVisible}
+        open={drawerVisible}
       >
         <Menu
           theme="dark"
@@ -141,16 +145,8 @@ const LayoutComp = () => {
             <Breadcrumb
               className="dark:text-darkSecondary"
               style={{ margin: "16px 0" }}
-            >
-              {breadcrumb.map((crumb, index) => (
-                <Breadcrumb.Item
-                  key={index}
-                  className="dark:text-darkSecondary"
-                >
-                  {crumb}
-                </Breadcrumb.Item>
-              ))}
-            </Breadcrumb>
+              items={breadcrumbItems}
+            />
             <div className="flex justify-center items-center gap-4 breadCrumbRight">
               <ThemeToggleComp />
               <LanguageToggleBtnComp />

@@ -23,20 +23,50 @@ body.dark {
 * {
   font-family: "Didact Gothic" !important;
 }
-
-//Layout Css
-:where(.css-dev-only-do-not-override-1pg9a38).ant-menu-inline .ant-menu-item {
-  height: 70px !important;
+//new layout Css
+:where(.css-dev-only-do-not-override-1c0na6j).ant-menu-inline .ant-menu-item,
+:where(.css-dev-only-do-not-override-1c0na6j).ant-menu-vertical
+  > .ant-menu-item {
+  line-height: 80px !important;
+  height: 80px !important;
 }
 
-:where(.css-dev-only-do-not-override-1pg9a38).ant-menu-vertical
-  > .ant-menu-item {
-  height: 70px !important;
+:where(.css-dev-only-do-not-override-1c0na6j).ant-menu-dark
+  .ant-menu-item-selected {
+  background-color: $layoutCollapserBgColor;
 }
 
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-vertical
+.dark
+  :where(.css-dev-only-do-not-override-1c0na6j).ant-menu-dark
+  .ant-menu-item-selected {
+  background-color: $darkLayoutTriggerandselectedMenuBg;
+}
+
+:where(.css-dev-only-do-not-override-1c0na6j).ant-menu
+  .ant-menu-item
+  .ant-menu-item-icon {
+  font-size: $layoutIconSize;
+}
+
+:where(.css-dev-only-do-not-override-1c0na6j).ant-layout
+  .ant-layout-sider-trigger {
+  background-color: $layoutCollapserBgColor;
+}
+
+.dark
+  :where(.css-dev-only-do-not-override-1c0na6j).ant-layout
+  .ant-layout-sider-trigger {
+  background-color: $darkLayoutTriggerandselectedMenuBg;
+}
+
+:where(.css-dev-only-do-not-override-1c0na6j).ant-menu-inline-collapsed
   > .ant-menu-item {
-  height: 70px !important;
+  padding-inline: calc(44% - 8px - 4px) !important;
+}
+
+:where(.css-dev-only-do-not-override-1c0na6j).ant-breadcrumb
+  .ant-breadcrumb-separator {
+  @apply dark:text-darkSecondary;
 }
 
 .layoutTrigger,
@@ -52,56 +82,22 @@ body.dark {
   background-color: $darkLayoutColor !important;
 }
 
-:where(.css-dev-only-do-not-override-1pg9a38).ant-menu
-  .ant-menu-item
-  .ant-menu-item-icon {
-  font-size: $layoutIconSize;
-}
-
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-menu-vertical
-  > .ant-menu-item {
-  line-height: 70px !important;
-}
-
-:where(.css-dev-only-do-not-override-1pg9a38).ant-menu-vertical
-  > .ant-menu-item {
-  line-height: 80px !important;
-}
-
-:where(.css-dev-only-do-not-override-1pg9a38).ant-menu-inline-collapsed
-  > .ant-menu-item {
-  padding-inline: calc(44% - 8px - 4px) !important;
-}
-
-:where(.css-dev-only-do-not-override-1pg9a38).ant-breadcrumb
-  .ant-breadcrumb-separator {
-  @apply dark:text-darkSecondary;
-}
-
 .dark :where(.css-dev-only-do-not-override-1pg9a38).ant-layout-footer {
   @apply dark:bg-darkPrimary;
 }
 
-:where(.css-dev-only-do-not-override-1pg9a38).ant-menu-dark
-  .ant-menu-item-selected {
-  background-color: $layoutCollapserBgColor;
+// new drawer css
+:where(.css-dev-only-do-not-override-1c0na6j).ant-drawer .ant-drawer-body,
+:where(.css-dev-only-do-not-override-1c0na6j).ant-drawer .ant-drawer-header {
+  background-color: #011528 !important;
+}
+:where(.css-dev-only-do-not-override-1c0na6j).ant-layout.ant-layout-has-sider {
+  background-color: $darkLayoutColor !important;
 }
 
-:where(.css-dev-only-do-not-override-1pg9a38).ant-layout
-  .ant-layout-sider-trigger {
-  background-color: $layoutCollapserBgColor;
-}
-
-.dark
-  :where(.css-dev-only-do-not-override-1pg9a38).ant-menu-dark
-  .ant-menu-item-selected {
-  background-color: $darkLayoutTriggerandselectedMenuBg;
-}
-
-.dark
-  :where(.css-dev-only-do-not-override-1pg9a38).ant-layout
-  .ant-layout-sider-trigger {
-  background-color: $darkLayoutTriggerandselectedMenuBg;
+:where(.css-dev-only-do-not-override-1c0na6j).ant-drawer .ant-drawer-title,
+:where(.css-dev-only-do-not-override-1c0na6j).ant-drawer .ant-drawer-close {
+  color: #f3f3f3 !important;
 }
 
 // Button Css
@@ -258,36 +254,14 @@ body.dark {
   transform: translateX(25px); /* Adjust this value to match the track width */
 }
 
-.dark
-  :where(.css-dev-only-do-not-override-1pg9a38).ant-drawer
-  .ant-drawer-body {
-  background-color: #011528 !important;
+.dark .drawerButton {
+  background-color: #111111 !important;
+  color: #f3f3f3 !important;
+  border: none !important;
 }
 
-.dark
-  :where(.css-dev-only-do-not-override-1pg9a38).ant-drawer
-  .ant-drawer-header {
-  background-color: #011528 !important;
-  color: white !important;
-}
-
-.dark
-  :where(.css-dev-only-do-not-override-1uq9j6g).ant-drawer
-  .ant-drawer-close {
-  color: white !important;
-}
-
-.dark
-  :where(
-    .css-dev-only-do-not-override-1pg9a38
-  ).ant-layout.ant-layout-has-sider {
-  @apply bg-darkPrimary;
-}
-
-.dark
-  :where(.css-dev-only-do-not-override-1pg9a38).ant-drawer
-  .ant-drawer-close {
-  color: #f3f3f3;
+.drawerButton {
+  padding: 2px !important;
 }
 
 //Media Queries

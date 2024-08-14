@@ -11,15 +11,15 @@ export default function DropzoneComp({ onDrop }) {
   return (
     <div
       {...getRootProps()}
-      className="border border-dashed border-gray-400 rounded-lg p-2"
+      className="dropDown border dark:bg-darkSecondary border-dashed border-gray-400 rounded-lg p-2"
     >
       <input {...getInputProps()} />
       {isDragActive ? (
-        <RiDragDropFill className="dark:text-darkSecondary w-20 h-20 cursor-pointer" />
+        <RiDragDropFill className="dark:text-darkPrimary w-20 h-20 cursor-pointer" />
       ) : (
-        <MdAdd className="dark:text-darkSecondary w-20 h-20 cursor-pointer" />
+        <MdAdd className="dark:text-darkPrimary w-20 h-20 cursor-pointer" />
       )}
-      <p className="text-center text-sm ">
+      <p className="text-center text-sm dark:text-darkPrimary">
         {t("addFiles")} <br /> {t("drag")}
       </p>
     </div>

@@ -98,13 +98,12 @@ function SettingsPage() {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen p-4 overflow-auto dark:bg-darkPrimary dark:text-darkSecondary">
       <div className="flex flex-col gap-6 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center">{t("noteSettings")}</h2>
+        <h2 className="text-4xl font-bold text-center ">{t("noteSettings")}</h2>
         <div className="flex flex-col gap-2">
           <label className="text-lg">{t("prevEmail")}</label>
           <InputComp
             inputType="email"
             inputValue={prevEmail}
-            inputDisabled="disabled"
             inputOnChange={(e) => setPrevEmail(e.target.value)}
             inputAddonAfter={
               <MdOutlineAttachEmail className="dark:text-darkSecondary" />

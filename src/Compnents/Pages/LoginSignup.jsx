@@ -127,7 +127,7 @@ export default function SignupLoginFormPage() {
           color="gray"
           floated={false}
           shadow={false}
-          className="bg-secondary dark:bg-darkPrimary m-0 grid place-items-center px-4 py-8 text-center"
+          className="bg-secondary dark:bg-[#444444] m-0 grid place-items-center px-4 py-8 text-center"
         >
           <div className="mb-4 w-full flex justify-center items-center">
             <SiSkyrock className="h-20 w-20 text-white" />
@@ -176,13 +176,10 @@ export default function SignupLoginFormPage() {
                     inputOnChange={(e) => setSignupPassword(e.target.value)}
                     inputPlaceHolder="*******"
                   />
-                  <Button
-                    size="lg"
-                    className="bg-secondary dark:bg-darkPrimary dark:text-darkSecondary"
-                    onClick={registerUser}
-                  >
-                    {t("signup")}
-                  </Button>
+                  <ButtonComp
+                    title={t("signup")}
+                    clickOnUniversalBtn={registerUser}
+                  />
                   <span className="text-center text-xl font-bold">or</span>
                   <ButtonComp
                     btnIcon={<FaGoogle />}
@@ -208,13 +205,10 @@ export default function SignupLoginFormPage() {
                     inputOnChange={(e) => setSigninPassword(e.target.value)}
                     inputPlaceHolder="*******"
                   />
-                  <Button
-                    size="lg"
-                    className="bg-secondary dark:bg-darkPrimary dark:text-darkSecondary"
-                    onClick={signinUser}
-                  >
-                    {t("signin")}
-                  </Button>
+                  <ButtonComp
+                    title={t("signin")}
+                    clickOnUniversalBtn={signinUser}
+                  />
                   <a className="text-red-600" onClick={handleForgotModal}>
                     {t("resetPassword")}
                   </a>

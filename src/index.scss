@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap");
 
-@tailwind base;
+@layer tailwind-base, antd;
+
+@layer tailwind-base {
+  @tailwind base;
+}
 @tailwind components;
 @tailwind utilities;
 
@@ -23,137 +27,118 @@ body.dark {
 * {
   font-family: "Didact Gothic" !important;
 }
+
 //new layout Css
-:where(.css-dev-only-do-not-override-1c0na6j).ant-menu-inline .ant-menu-item,
-:where(.css-dev-only-do-not-override-1c0na6j).ant-menu-vertical
-  > .ant-menu-item {
-  line-height: 80px !important;
-  height: 80px !important;
-}
-
-:where(.css-dev-only-do-not-override-1c0na6j).ant-menu-dark
-  .ant-menu-item-selected {
-  background-color: $layoutCollapserBgColor;
-}
-
-.dark
-  :where(.css-dev-only-do-not-override-1c0na6j).ant-menu-dark
-  .ant-menu-item-selected {
-  background-color: $darkLayoutTriggerandselectedMenuBg;
-}
-
-:where(.css-dev-only-do-not-override-1c0na6j).ant-menu
-  .ant-menu-item
-  .ant-menu-item-icon {
-  font-size: $layoutIconSize;
-}
-
-:where(.css-dev-only-do-not-override-1c0na6j).ant-layout
-  .ant-layout-sider-trigger {
-  background-color: $layoutCollapserBgColor;
-}
-
-.dark
-  :where(.css-dev-only-do-not-override-1c0na6j).ant-layout
-  .ant-layout-sider-trigger {
-  background-color: $darkLayoutTriggerandselectedMenuBg;
-}
-
-:where(.css-dev-only-do-not-override-1c0na6j).ant-menu-inline-collapsed
-  > .ant-menu-item {
-  padding-inline: calc(44% - 8px - 4px) !important;
-}
-
-:where(.css-dev-only-do-not-override-1c0na6j).ant-breadcrumb
-  .ant-breadcrumb-separator {
-  @apply dark:text-darkSecondary;
-}
-
 .layoutTrigger,
 .layoutMenu {
   background-color: $layoutMenuBgColor !important;
 }
 
-.dark .layoutMenu {
-  background-color: $darkLayoutColor !important;
-}
-
+.dark .layoutMenu,
 .dark .layoutTrigger {
   background-color: $darkLayoutColor !important;
 }
 
-.dark :where(.css-dev-only-do-not-override-1pg9a38).ant-layout-footer {
-  @apply dark:bg-darkPrimary;
+.drawer {
+  background-color: $layoutMenuBgColor !important;
+  color: $bodyBgColor !important;
 }
 
-// new drawer css
-:where(.css-dev-only-do-not-override-1c0na6j).ant-drawer .ant-drawer-body,
-:where(.css-dev-only-do-not-override-1c0na6j).ant-drawer .ant-drawer-header {
-  background-color: #011528 !important;
-}
-:where(.css-dev-only-do-not-override-1c0na6j).ant-layout.ant-layout-has-sider {
+.dark .drawer {
   background-color: $darkLayoutColor !important;
 }
 
-:where(.css-dev-only-do-not-override-1c0na6j).ant-drawer .ant-drawer-title,
-:where(.css-dev-only-do-not-override-1c0na6j).ant-drawer .ant-drawer-close {
+.ant-menu-inline-collapsed > .ant-menu-item {
+  padding-inline: calc(44% - 8px - 4px);
+}
+
+.footerText {
+  color: $darkLayoutColor !important;
+}
+
+.footerText,
+.ant-drawer-close {
+  font-weight: bolder !important;
+}
+
+.ant-drawer-close ant-layout-has-sider {
+  background-color: $darkLayoutColor !important;
+}
+
+.ant-menu-item {
+  height: 80px !important;
+  line-height: 80px !important;
+}
+
+.ant-menu-item-selected,
+.ant-layout-sider-trigger {
+  background-color: $layoutCollapserBgColor !important;
+}
+
+.dark .ant-menu-item-selected,
+.dark .ant-layout-sider-trigger {
+  background-color: $darkLayoutTriggerandselectedMenuBg !important;
+}
+
+.dark .ant-breadcrumb-separator {
+  color: $bodyBgColor !important;
+}
+
+.dark .ant-layout-has-sider {
+  background-color: $darkLayoutColor !important;
+}
+
+.ant-menu-item-icon {
+  font-size: $layoutIconSize !important;
+}
+
+.dark .ant-float-btn-body {
+  background-color: $darkLayoutTriggerandselectedMenuBg !important;
+  color: $bodyBgColor !important;
+}
+
+.dark .drawerButton {
+  background-color: #111111 !important;
   color: #f3f3f3 !important;
-}
-
-// Button Css
-:where(.css-dev-only-do-not-override-1pg9a38).ant-btn-default:not(
-    :disabled
-  ):not(.ant-btn-disabled) {
+  margin-top: 2px !important;
   border: none !important;
 }
 
-:where(.css-dev-only-do-not-override-1pg9a38).ant-btn-default:not(
-    :disabled
-  ):not(.ant-btn-disabled):hover {
-  @apply bg-darkSecondary;
+.drawerButton {
+  padding: 2px !important;
+}
+
+//Text Css
+.ant-input-clear-icon {
+  color: $darkLayoutColor !important;
+}
+
+.dark
+  .ant-input-textarea-affix-wrapper.ant-input-affix-wrapper
+  > textarea.ant-input::placeholder,
+.dark .ant-input-clear-icon {
+  color: $darkLayoutColor !important;
+}
+
+// loginSignup css
+.dark .ant-input-group-addon {
+  background-color: $darkLayoutColor !important;
+}
+
+// Feedback Css
+.ant-input-outlined:focus,
+.ant-select-selector:focus,
+.ant-input-outlined:focus-within,
+.ant-select-selector:focus-within,
+.ant-input-outlined:hover,
+.ant-select-selector:hover {
+  border: 1px solid $layoutCollapserBgColor !important;
+}
+
+.dark .ant-input-outlined,
+.dark .ant-select-selector {
   border: none !important;
-  transition: background-color ease 1s;
-  color: #111111;
-}
-
-//Sky Share Css
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-btn {
-  height: 0% !important;
-  border: none !important;
-}
-
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-btn-default:not(
-    :disabled
-  ):not(.ant-btn-disabled):hover {
-  background-color: #6e5c8b !important;
-  color: #f3f3f3;
-}
-
-//Feedback Css
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-input-outlined:focus {
-  border-color: #6e5c8b !important;
-  box-shadow: none !important;
-}
-
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-input-outlined:hover {
-  border-color: #6e5c8b !important;
-  box-shadow: none !important;
-}
-
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-select-outlined:not(
-    .ant-select-customize-input
-  )
-  .ant-select-selector:hover {
-  border-color: #6e5c8b !important;
-  box-shadow: none !important;
-}
-
-:where(.css-dev-only-do-not-override-1uq9j6g).ant-select-outlined:not(
-    .ant-select-customize-input
-  )
-  .ant-select-selector:active {
-  border-color: #6e5c8b !important;
-  box-shadow: none !important;
+  background-color: $bodyBgColor;
 }
 
 //Image Css
@@ -179,30 +164,14 @@ body.dark {
   @apply dark:text-darkSecondary;
 }
 
-.dark
-  :where(.css-dev-only-do-not-override-1uq9j6g).ant-input-group-wrapper-outlined
-  .ant-input-group-addon {
-  @apply dark:bg-darkPrimary;
+// Button Css
+.allButton {
+  background-color: $layoutCollapserBgColor !important;
+  color: $bodyBgColor !important;
 }
 
-//Modal Css
-.dark
-  :where(.css-dev-only-do-not-override-1uq9j6g).ant-modal
-  .ant-modal-content {
-  background-color: $darkLayoutTriggerandselectedMenuBg;
-}
-
-.dark
-  :where(.css-dev-only-do-not-override-1uq9j6g).ant-result
-  .ant-result-subtitle {
-  @apply dark:text-darkSecondary;
-}
-
-//Popover Css
-.dark
-  :where(.css-dev-only-do-not-override-1uq9j6g).ant-popover
-  .ant-popover-inner {
-  background-color: $darkLayoutTriggerandselectedMenuBg;
+.dark .allButton {
+  background-color: $darkLayoutTriggerandselectedMenuBg !important;
 }
 
 //Loader Css
@@ -254,16 +223,6 @@ body.dark {
   transform: translateX(25px); /* Adjust this value to match the track width */
 }
 
-.dark .drawerButton {
-  background-color: #111111 !important;
-  color: #f3f3f3 !important;
-  border: none !important;
-}
-
-.drawerButton {
-  padding: 2px !important;
-}
-
 //Media Queries
 @media only screen and (max-width: 750px) {
   .typingEffectInput {
@@ -299,11 +258,6 @@ body.dark {
 }
 
 @media only screen and (max-width: 320px) {
-  :where(.css-dev-only-do-not-override-1uq9j6g).ant-layout
-    .ant-layout-sider-trigger {
-    background-color: $layoutMenuBgColor !important;
-  }
-
   .typingEffectInput {
     @apply text-sm;
   }

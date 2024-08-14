@@ -9,7 +9,7 @@ function TextAreaComp({ textAreaPlaceHolder, textValue, setTextValue }) {
         value={textValue}
         onChange={(e) => setTextValue(e.target.value)}
         placeholder={textAreaPlaceHolder}
-        className="textAreaShare dark:bg-darkPrimary dark:text-darkSecondary text-4xl border border-none w-full overflow-hidden"
+        className="textAreaShare dark:bg-darkSecondary dark:text-darkPrimary text-4xl border border-none w-full overflow-hidden"
         autoSize
         allowClear
       />

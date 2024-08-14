@@ -94,7 +94,9 @@ const LayoutComp = () => {
         return user ? (
           <SettingsPage />
         ) : (
-          <h1 className="text-4xl font-bold text-center">{t("pleaseLogin")}</h1>
+          <h1 className="text-4xl font-bold text-center dark:text-darkSecondary">
+            {t("pleaseLogin")}
+          </h1>
         );
       default:
         return <>Bill is a cat.</>;
@@ -121,30 +123,32 @@ const LayoutComp = () => {
         />
       </Sider>
       <ButtonComp
-        classes="drawerButton top-3 left-2"
+        classes="drawerButton top-3 left-2 p-0"
         btnIcon={<MdMenu className="w-6 h-6" />}
         clickOnUniversalBtn={() => setDrawerVisible(true)}
       />
       <Drawer
         title={t("menu")}
         placement="left"
+        className="drawer"
         onClose={() => setDrawerVisible(false)}
         open={drawerVisible}
       >
         <Menu
           theme="dark"
+          className="layoutMenu"
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={items}
           onClick={handleMenuClick}
         />
       </Drawer>
-      <Layout className="dark:bg-darkPrimary">
+      <Layout className="dark:bg-darkPrimary ">
         <Content style={{ margin: "0 16px" }}>
           <div className="breadCrumbDiv flex justify-between items-center ">
             <Breadcrumb
               className="dark:text-darkSecondary"
-              style={{ margin: "16px 0" }}
+              style={{ margin: "16px 0px" }}
               items={breadcrumbItems}
             />
             <div className="flex justify-center items-center gap-4 breadCrumbRight">
@@ -163,7 +167,7 @@ const LayoutComp = () => {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          <span className="font-light dark:text-darkSecondary">
+          <span className="font-light dark:text-darkSecondary footerText">
             {t("productCreated")}
           </span>
         </Footer>

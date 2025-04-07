@@ -1,3 +1,4 @@
+// Libraries Imports
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -87,9 +88,9 @@ const resources = {
       enterNewPassword: "Enter new password.",
       sendRequest: "Send Request",
       resetPassword: "Reset Password ?",
-      sendRequest: "Send Request",
       pleaseLogin: "Please Login first to view settings.",
-      menu:"Menu"
+      alreadyLogin: "You are already Login. Now, its time to explore.",
+      menu: "Menu",
     },
   },
   ur: {
@@ -175,9 +176,9 @@ const resources = {
       enterNewEmail: "نیو ای میل درج کریں۔",
       sendRequest: "درخواست بھیجیں",
       resetPassword: "پاس ورڈ ری سیٹ ؟",
-      sendRequest: "درخواست بھیجیں",
       pleaseLogin: "براہ کرم ترتیبات دیکھنے کے لیے پہلے لاگ ان کریں۔",
-      menu:"مینو"
+      alreadyLogin: "آپ پہلے ہی لاگ ان ہیں۔ اب، یہ دریافت کرنے کا وقت ہے.",
+      menu: "مینو",
     },
   },
 };

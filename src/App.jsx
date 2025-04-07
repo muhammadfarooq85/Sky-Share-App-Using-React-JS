@@ -1,11 +1,7 @@
-import RouterComp from "./Routes";
+import RouterComp from "./Router/Routes";
 
 function App() {
-  return (
-    <>
-      <RouterComp />
-    </>
-  );
+  return <RouterComp />;
 }
 
 export default App;

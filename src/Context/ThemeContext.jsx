@@ -1,8 +1,11 @@
+// Libraries Imports
 import { createContext, useContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 const ThemeContext = createContext();
+const useTheme = () => useContext(ThemeContext);
 
-export const ThemeProviderContext = ({ children }) => {
+const ThemeProviderContext = ({ children }) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
@@ -21,4 +24,8 @@ export const ThemeProviderContext = ({ children }) => {
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+ThemeProviderContext.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export { useTheme, ThemeProviderContext };

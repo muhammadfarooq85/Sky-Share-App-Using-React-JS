@@ -53,35 +53,35 @@ VITE_APP_FIREBASE_APP_ID=your_app_id
 
 ## Welcome Page
 
-![welcome](./src/assets/welcome.png)
+![welcome](./src/Assets/welcome.png)
 
 ## Share Text Page
 
-![text](./src/assets/text.png)
+![text](./src/Assets/text.png)
 
 ## Share Files Page
 
-![files](./src/assets/files.png)
+![files](./src/Assets/files.png)
 
 ## Download Page
 
-![files](./src/assets/install.png)
+![files](./src/Assets/install.png)
 
 ## How it works Page
 
-![How Works](./src/assets/howworks.png)
+![How Works](./src/Assets/howworks.png)
 
 ## Contatct Page
 
-![Contact](./src/assets/contact.png)
+![Contact](./src/Assets/contact.png)
 
 ## Feedback Page
 
-![Feedback](./src/assets/feedback.png)
+![Feedback](./src/Assets/feedback.png)
 
 ## Account Page
 
-![account](./src/assets/account.png)
+![account](./src/Assets/account.png)
 
 ## Usage
 

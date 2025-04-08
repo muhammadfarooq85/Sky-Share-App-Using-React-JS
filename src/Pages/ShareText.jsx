@@ -27,7 +27,7 @@ function TextsPage() {
   const [isText, setIsText] = useState(false);
   const [userKey, setUserKey] = useState("");
   const { t } = useTranslation();
-  const { isuser } = useContext(UserContext);
+  const { isUser } = useContext(UserContext);
 
   useEffect(() => {
     setLoading(true);
@@ -77,6 +77,8 @@ function TextsPage() {
       toast.success("Your text uploaded successfully.");
       setUserKey(newTextRef.key);
     } catch (error) {
+      console.log(error);
+
       toast.error("Please try again.");
     }
   };

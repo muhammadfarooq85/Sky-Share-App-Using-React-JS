@@ -28,11 +28,11 @@ function SkySharePage() {
           strings={[
             t("exploreText"),
             t("exploreFiles"),
-            t("exploreDownload"),
             t("exploreWorking"),
             t("exploreFeedback"),
             t("exploreContact"),
             t("exploreAccount"),
+            t("exploreSettings"),
           ]}
           typeSpeed={60}
           backSpeed={60}

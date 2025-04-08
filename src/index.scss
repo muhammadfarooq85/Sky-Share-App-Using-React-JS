@@ -97,6 +97,10 @@ body.dark {
   color: $bodyBgColor !important;
 }
 
+.dark .ant-layout-footer {
+  background-color: $darkLayoutColor !important;
+}
+
 .dark .drawerButton {
   background-color: #111111 !important;
   color: #f3f3f3 !important;

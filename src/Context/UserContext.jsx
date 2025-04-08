@@ -15,17 +15,14 @@ const UserContextProvider = ({ children }) => {
       if (currentUser) {
         setIsUser(true);
         setUser(currentUser);
-        console.log(isUser);
       } else {
         setUser(null);
         setIsUser(false);
-        console.log(isUser);
       }
     });
 
-    // Clean up the subscription when the component unmounts
     return () => unsubscribe();
-  }, []);
+  }, [isUser]);
 
   return (
     <UserContext.Provider value={{ user, isUser }}>

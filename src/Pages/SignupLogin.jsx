@@ -31,7 +31,7 @@ import ForgotPasswordModalComp from "../Components/ForgotPasswordModal";
 import ButtonComp from "../Components/Button";
 import { emailRegex, passwordRegex } from "../Constants/constants";
 
-export default function SignupLoginFormPage() {
+function SignupLoginPage() {
   const [type, setType] = useState("card");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
@@ -47,19 +47,19 @@ export default function SignupLoginFormPage() {
   // Registering user with email and password
   const registerUser = async () => {
     if (signupEmail === "") {
-      toast.error("Please provide email.");
+      toast.error("Please provide email!");
     } else if (!emailRegex.test(signupEmail)) {
-      toast.error("Invalid email.");
+      toast.error("Invalid email!");
     } else if (signupPassword === "") {
-      toast.error("Please provide password.");
+      toast.error("Please provide password!");
     } else if (!passwordRegex.test(signupPassword)) {
       toast.error(
-        "Password must be One uppercase, one lowerCase, one digit and one special character. Length should be 8."
+        "Password must be One uppercase, one lowerCase, one digit and one special character. Length should be 8!"
       );
     } else {
       await createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
         .then(() => {
-          toast.success("Signup successfully.");
+          toast.success("Signup successfully!");
           setSignupEmail("");
           setSignupPassword("");
         })
@@ -69,7 +69,7 @@ export default function SignupLoginFormPage() {
             toast.error("Email already registerd. Please login!");
             return;
           }
-          toast.error("Please try again");
+          toast.error("Please try again!");
         });
     }
   };
@@ -77,22 +77,22 @@ export default function SignupLoginFormPage() {
   //Signin User with email and password
   const signinUser = () => {
     if (signinEmail === "") {
-      toast.error("Please provide email.");
+      toast.error("Please provide email!");
     } else if (!emailRegex.test(signinEmail)) {
-      toast.error("Invalid email.");
+      toast.error("Invalid email!");
     } else if (signinPassword === "") {
-      toast.error("Please provide password.");
+      toast.error("Please provide password!");
     } else if (!passwordRegex.test(signinPassword)) {
-      toast.error("Invlaid password.");
+      toast.error("Invlaid password!");
     } else {
       signInWithEmailAndPassword(auth, signinEmail, signinPassword)
         .then(() => {
-          toast.success("Signin successfully.");
+          toast.success("Signin successfully!");
           setSigninEmail("");
           setSigninPassword("");
         })
         .catch(() => {
-          toast.error("Please try again.");
+          toast.error("Please try again!");
         });
     }
   };
@@ -130,9 +130,9 @@ export default function SignupLoginFormPage() {
               <Tab value="card" onClick={() => setType("card")}>
                 {t("signup")}
               </Tab>
-              <TabsHeader value="paypal" onClick={() => setType("paypal")}>
+              <Tab value="paypal" onClick={() => setType("paypal")}>
                 {t("signin")}
-              </TabsHeader>
+              </Tab>
             </TabsHeader>
             <TabsBody
               animate={{
@@ -214,3 +214,5 @@ export default function SignupLoginFormPage() {
     </div>
   );
 }
+
+export default SignupLoginPage;

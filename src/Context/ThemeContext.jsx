@@ -1,9 +1,8 @@
 // Libraries Imports
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 const ThemeContext = createContext();
-const useTheme = () => useContext(ThemeContext);
 
 const ThemeProviderContext = ({ children }) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -28,4 +27,4 @@ ThemeProviderContext.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export { useTheme, ThemeProviderContext };
+export { ThemeContext, ThemeProviderContext };

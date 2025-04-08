@@ -2,7 +2,6 @@
 import { useState, useContext } from "react";
 import { Progress } from "antd";
 import toast from "react-hot-toast";
-import { ClipLoader } from "react-spinners";
 import { MdFilePresent, MdDelete } from "react-icons/md";
 // Local Imports
 import ButtonComp from "../Components/Button";
@@ -24,6 +23,7 @@ import { useTranslation } from "react-i18next";
 import InputComp from "../Components/Input";
 import "../Config/i18Next";
 import { passwordRegex } from "../Constants/constants";
+import LoaderComp from "../Components/Loader";
 
 function FilesPage() {
   const [files, setFiles] = useState([]);
@@ -205,9 +205,9 @@ function FilesPage() {
         <div className="filesDiv flex justify-start items-center flex-wrap">
           {files.map((fileObj, index) => (
             <div key={index} className="p-2 relative">
-              {fileObj.loading && isImage(fileObj.file) && (
+              {fileObj?.loading && isImage(fileObj?.file) && (
                 <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
-                  <ClipLoader className="loader" size={32} color={"#000"} />
+                  <LoaderComp />
                 </div>
               )}
               <div className="flex flex-col justify-center items-center cursor-pointer relative">

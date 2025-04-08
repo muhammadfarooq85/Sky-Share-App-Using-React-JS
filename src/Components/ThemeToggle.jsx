@@ -1,9 +1,11 @@
 // Libraries Imports
+import { useContext } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { useTheme } from "../Context/ThemeContext";
+// Local Imports
+import { ThemeContext } from "../Context/ThemeContext";
 
 function ThemeToggleComp() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useContext(ThemeContext);
 
   return (
     <button

@@ -18,7 +18,7 @@ import FilesPage from "../Pages/ShareFiles";
 import FeedbackPage from "../Pages/Feedback";
 import ContactPage from "../Pages/Contact";
 import HowItWorksPage from "../Pages/HowItWorks";
-import SignupLoginFormPage from "../Pages/LoginSignup";
+import SignupLoginFormPage from "../Pages/SignupLogin";
 import SettingsPage from "../Pages/AccountSettings";
 import ThemeToggleComp from "./ThemeToggle";
 import LanguageToggleBtnComp from "./LanguageToggleBtn";

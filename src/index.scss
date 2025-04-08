@@ -189,10 +189,11 @@ body.dark {
   width: 120px;
   height: 22px;
   border-radius: 40px;
-  color: #514b82;
+  color: #846ea7;
   border: 2px solid;
   position: relative;
 }
+
 .loader::before {
   content: "";
   position: absolute;
@@ -205,6 +206,7 @@ body.dark {
   background: currentColor;
   animation: l3 1s infinite linear;
 }
+
 @keyframes l3 {
   50% {
     left: 100%;

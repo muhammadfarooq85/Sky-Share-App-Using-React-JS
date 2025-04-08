@@ -2,6 +2,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "@material-tailwind/react";
+import { BrowserRouter } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 // Local Imports
 import App from "./App.jsx";
 import { ThemeProviderContext } from "./Context/ThemeContext.jsx";
@@ -13,7 +15,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <UserContextProvider>
       <ThemeProvider>
         <ThemeProviderContext>
-          <App />
+          <BrowserRouter>
+            <Toaster />
+            <App />
+          </BrowserRouter>
         </ThemeProviderContext>
       </ThemeProvider>
     </UserContextProvider>

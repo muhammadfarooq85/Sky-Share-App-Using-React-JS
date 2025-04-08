@@ -1,19 +1,25 @@
 // Libraries Imports
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+import { Suspense, lazy } from "react";
+import { Route, Routes } from "react-router-dom";
 // Local Imports
-import HomePage from "../Pages/Home";
+const HomePage = lazy(() => import("../Pages/Home"));
 import PageNotFound from "../Pages/404";
+import LoaderComp from "../Components/Loader";
 
 function RouterComp() {
   return (
-    <BrowserRouter>
-      <Toaster />
+    <Suspense
+      fallback={
+        <div className="loader-container h-screen">
+          <LoaderComp />
+        </div>
+      }
+    >
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-    </BrowserRouter>
+    </Suspense>
   );
 }
 

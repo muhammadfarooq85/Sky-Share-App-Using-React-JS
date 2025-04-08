@@ -36,63 +36,63 @@ function SettingsPage() {
     }
 
     if (!emailRegex.test(newEmail)) {
-      toast.error("Invalid email format.");
+      toast.error("Invalid email format!");
       return;
     }
 
     const user = auth.currentUser;
     if (!user) {
-      toast.error("No user is signed in.");
+      toast.error("No user is signed in!");
       return;
     }
 
     try {
       await updateEmail(user, newEmail);
-      toast.success("Email updated successfully.");
+      toast.success("Email updated successfully!");
     } catch (error) {
       switch (error.code) {
         case "auth/requires-recent-login":
-          toast.error("Please re-authenticate and try again.");
+          toast.error("Please login again!");
           break;
         case "auth/invalid-email":
-          toast.error("Invalid email address.");
+          toast.error("Invalid email address!");
           break;
         case "auth/email-already-in-use":
-          toast.error("Email is already in use.");
+          toast.error("Email is already in use!");
           break;
         default:
-          toast.error("Error updating email. Please try again.");
+          toast.error("Error updating email. Please try again!");
       }
     }
   };
 
   const handleUpdatePassword = async () => {
     if (!newPassword) {
-      toast.error("Please enter password.");
+      toast.error("Please enter password!");
       return;
     }
     if (!passwordRegex.test(newPassword)) {
       toast.error(
-        "Password must be One uppercase, one lowerCase, one digit and one special character. Length should be 8."
+        "Password must be One uppercase, one lowerCase, one digit and one special character. Length should be 8!"
       );
       return;
     }
     await updatePassword(auth.currentUser, newPassword)
       .then(() => {
-        toast.success("Password updated successfully.");
+        toast.success("Password updated successfully!");
       })
       .catch(() => {
-        toast.error("Please try again.");
+        toast.error("Please try again!");
       });
   };
 
   const handleSignOut = async () => {
     await signOut(auth)
       .then(() => {
-        toast.success("Successfully signout.");
+        toast.success("Successfully signout!");
       })
       .catch(() => {
-        toast.error("Please try again.");
+        toast.error("Please try again!");
       });
   };
 

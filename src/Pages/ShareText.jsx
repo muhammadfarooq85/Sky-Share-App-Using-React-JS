@@ -37,7 +37,7 @@ function TextsPage() {
       if (data) {
         for (const key in data) {
           if (data[key].textPassword === textPassword) {
-            toast.success("Text decrypted successfuly.");
+            toast.success("Text decrypted successfuly!");
             setTextValue(data[key].textValue);
             setUserKey(key);
             setIsText(true);

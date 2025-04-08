@@ -23,23 +23,23 @@ function ForgotPasswordModalComp({ open, setOpen }) {
 
   const handleForgotEmail = async () => {
     if (!forgotEmail) {
-      toast.error("Plese enter email.");
+      toast.error("Plese enter email!");
       return;
     }
 
     if (!emailRegex.test(forgotEmail)) {
-      toast.error("Invalid email.");
+      toast.error("Invalid email!");
       return;
     }
 
     await sendPasswordResetEmail(auth, forgotEmail)
       .then(() => {
         toast.success(
-          "Password request granted successfully. Please check your invox and reset password."
+          "Password request granted successfully. Please check your invox and reset password!"
         );
       })
       .catch(() => {
-        toast.error("Please try again.");
+        toast.error("Please try again!");
       });
   };
 

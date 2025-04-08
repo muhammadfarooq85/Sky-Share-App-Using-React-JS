@@ -42,7 +42,7 @@ function FilesModalComp({ open, setOpen, userKey, setUserKey, filesPassword }) {
       if (data) {
         for (const key in data) {
           if (data[key].filesPassword === filesPassword) {
-            toast.success("Files decrypted successfuly.");
+            toast.success("Files decrypted successfuly!");
             setStorageFiles(data[key].allFiles);
             setIsFile(data[key].allFiles && data[key].allFiles.length > 0);
             setUserKey(key);
@@ -83,7 +83,7 @@ function FilesModalComp({ open, setOpen, userKey, setUserKey, filesPassword }) {
     Promise.all(promises)
       .then(() => zip.generateAsync({ type: "blob" }))
       .then((blob) => saveAs(blob, "MULTIPLE-FILES.zip"))
-      .catch(() => toast.error("An error occurred while downloading files."))
+      .catch(() => toast.error("An error occurred while downloading files!"))
       .finally(() => setIsLoading(false));
   };
 
@@ -98,11 +98,10 @@ function FilesModalComp({ open, setOpen, userKey, setUserKey, filesPassword }) {
 
       // Remove the database entry for sharedFiles
       await remove(databaseRef(database, `sharedFiles/${userKey}`));
-
-      toast.success("All files deleted successfully.");
+      toast.success("All files deleted successfully!");
       handleClose();
     } catch (error) {
-      toast.error("Please try again.");
+      toast.error("Please try again!");
     } finally {
       setIsLoading(false);
     }

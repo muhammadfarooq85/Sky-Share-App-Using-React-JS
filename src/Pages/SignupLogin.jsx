@@ -101,10 +101,10 @@ function SignupLoginPage() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then(() => {
-        toast.success("Successfully signup with Goolge.");
+        toast.success("Successfully signup with Goolge!");
       })
       .catch(() => {
-        toast.error("Please try again.");
+        toast.error("Please try again!");
       });
   };
 

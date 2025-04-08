@@ -36,12 +36,12 @@ function FilesPage() {
 
   const handleFileModal = () => {
     if (!filesPassword) {
-      toast.error("Please provide a password.");
+      toast.error("Please provide a password!");
       return;
     }
 
     if (!passwordRegex.test(filesPassword)) {
-      toast.error("Invalid password.");
+      toast.error("Invalid password!");
       return;
     }
     setOpen(true);
@@ -57,7 +57,7 @@ function FilesPage() {
 
   const onDrop = (acceptedFiles) => {
     onFileUpload(acceptedFiles);
-    toast.success("File selected. Now, move forward.");
+    toast.success("File selected. Now, move forward!");
   };
 
   const handleImageLoad = (index) => {
@@ -75,28 +75,28 @@ function FilesPage() {
 
   const handleDleteAllFiles = () => {
     if (files.length === 0) {
-      toast.error("Please select files first.");
+      toast.error("Please select files first!");
       return;
     }
     setFiles([]);
-    toast.success("All files are deleted successfully.");
+    toast.success("All files are deleted successfully!");
   };
 
   const isImage = (file) => file.type.startsWith("image/");
 
   const handleAllFilesUpload = async () => {
     if (files.length === 0) {
-      toast.error("Please select files first.");
+      toast.error("Please select files first!");
       return;
     }
 
     if (files.length > 4) {
-      toast.error("You can upload only 4 files.");
+      toast.error("You can upload only 4 files!");
       return;
     }
 
     if (!filesPassword) {
-      toast.error("Please provide a password.");
+      toast.error("Please provide a password!");
       return;
     }
     if (!passwordRegex.test(filesPassword)) {

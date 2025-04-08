@@ -65,7 +65,7 @@ function TextsPage() {
       return;
     }
     try {
-      if (!isuser) {
+      if (!isUser) {
         toast.error("Please login or signup first!");
         return;
       }

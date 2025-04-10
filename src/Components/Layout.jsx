@@ -39,13 +39,13 @@ const LayoutComp = () => {
   const { t } = useTranslation();
   const items = [
     getItem(t("menu1"), "1", <SiSkyrock />),
-    getItem(t("menu2"), "2", <LuScrollText />),
-    getItem(t("menu3"), "3", <FaRegFileImage />),
-    getItem(t("menu4"), "4", <GrWorkshop />),
-    getItem(t("menu6"), "6", <VscFeedback />),
-    getItem(t("menu7"), "7", <RiContactsBook3Line />),
-    getItem(t("menu8"), "8", <BiSolidUserAccount />),
-    getItem(t("menu9"), "9", <MdSettings />),
+    getItem(t("menu4"), "2", <GrWorkshop />),
+    getItem(t("menu2"), "3", <LuScrollText />),
+    getItem(t("menu3"), "4", <FaRegFileImage />),
+    getItem(t("menu6"), "5", <VscFeedback />),
+    getItem(t("menu7"), "6", <RiContactsBook3Line />),
+    getItem(t("menu8"), "7", <BiSolidUserAccount />),
+    getItem(t("menu9"), "8", <MdSettings />),
   ];
 
   const { user, isUser } = useContext(UserContext);
@@ -76,17 +76,17 @@ const LayoutComp = () => {
     switch (selectedMenuItem) {
       case "1":
         return <SkySharePage />;
-      case "2":
-        return <TextsPage />;
       case "3":
-        return <FilesPage />;
+        return <TextsPage />;
       case "4":
+        return <FilesPage />;
+      case "2":
         return <HowItWorksPage />;
-      case "6":
+      case "5":
         return <FeedbackPage />;
-      case "7":
+      case "6":
         return <ContactPage />;
-      case "8":
+      case "7":
         return !isUser ? (
           <SignupLoginFormPage />
         ) : (
@@ -94,7 +94,7 @@ const LayoutComp = () => {
             {t("alreadyLogin")}
           </h1>
         );
-      case "9":
+      case "8":
         return isUser ? (
           <SettingsPage />
         ) : (

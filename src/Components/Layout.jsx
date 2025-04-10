@@ -54,7 +54,7 @@ const LayoutComp = () => {
   const [selectedMenuItem, setSelectedMenuItem] = useState("1");
   const [drawerVisible, setDrawerVisible] = useState(false);
 
-  const breadcrumbItems = breadcrumb.map((crumb, index) => ({
+  const breadcrumbItems = breadcrumb?.map((crumb, index) => ({
     title: <span className="dark:text-darkSecondary">{crumb}</span>,
     key: index,
   }));

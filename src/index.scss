@@ -97,8 +97,20 @@ body.dark {
   color: $bodyBgColor !important;
 }
 
+.ant-drawer-header-title {
+  flex-direction: row-reverse;
+}
+
 .dark .ant-layout-footer {
   background-color: $darkLayoutColor !important;
+}
+.ant-drawer-close {
+  margin: 0px !important;
+}
+
+.ant-drawer-close > span svg {
+  color: #fff !important;
+  font-size: 18px !important;
 }
 
 .dark .drawerButton {

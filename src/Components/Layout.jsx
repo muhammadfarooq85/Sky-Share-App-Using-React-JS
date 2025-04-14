@@ -10,6 +10,7 @@ import { LuScrollText } from "react-icons/lu";
 import { FaRegFileImage } from "react-icons/fa6";
 import { MdSettings, MdMenu } from "react-icons/md";
 import { BiSolidUserAccount } from "react-icons/bi";
+import { FaGithubSquare, FaFacebookSquare, FaLinkedin } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 // Local Imports
 import SkySharePage from "../Pages/SkyShare";
@@ -173,16 +174,32 @@ const LayoutComp = () => {
             {renderContent()}
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          <h1 className="text-xl md:text-2xl font-bold text-center dark:text-darkSecondary">
-            Give a star on{" "}
+        <Footer className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center sm:gap-0 ">
+          <div className="flex justify-center items-center gap-4">
+            <a href="https://github.com/muhammadfarooq85" target="_blank">
+              <FaGithubSquare size={30} className="text-[#253552]" />
+            </a>
+            <a href="https://web.facebook.com/muhammadfarooq85" target="_blank">
+              <FaFacebookSquare size={30} className="text-[#253552]" />
+            </a>
             <a
-              href="https://github.com/muhammadfarooq85/Sky-Share-App-Using-React-JS"
+              href="https://www.linkedin.com/in/muhammadfarooq85"
               target="_blank"
             >
-              <span className="red">Github ⭐</span>
+              <FaLinkedin size={30} className="text-[#253552]" />
             </a>
-          </h1>
+          </div>
+          <div>
+            <h1 className="text-xl md:text-2xl font-bold text-center dark:text-darkSecondary">
+              Give a star on{" "}
+              <a
+                href="https://github.com/muhammadfarooq85/Sky-Share-App-Using-React-JS"
+                target="_blank"
+              >
+                <span className="red">Github ⭐</span>
+              </a>
+            </h1>
+          </div>
         </Footer>
       </Layout>
     </Layout>

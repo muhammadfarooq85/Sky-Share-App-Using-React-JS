@@ -22,12 +22,15 @@ function SettingsPage() {
   const [prevEmail, setPrevEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  let [isPasswordUpdating, setIsPasswordUpdating] = useState(false);
+  let [isEmailUpdating, setIsEmailUpdating] = useState(false);
+  let [isSignout, setIsSignout] = useState(false);
   const { user } = useContext(UserContext);
   const { t } = useTranslation();
 
   useEffect(() => {
     setPrevEmail(user?.email);
-  }, []);
+  }, [user]);
 
   const handleUpdateEmail = async () => {
     if (!newEmail) {
@@ -47,8 +50,10 @@ function SettingsPage() {
     }
 
     try {
+      setIsEmailUpdating(true);
       await updateEmail(user, newEmail);
       toast.success("Email updated successfully!");
+      setNewEmail("");
     } catch (error) {
       switch (error.code) {
         case "auth/requires-recent-login":
@@ -63,6 +68,8 @@ function SettingsPage() {
         default:
           toast.error("Error updating email. Please try again!");
       }
+    } finally {
+      setIsEmailUpdating(false);
     }
   };
 
@@ -77,28 +84,33 @@ function SettingsPage() {
       );
       return;
     }
-    await updatePassword(auth.currentUser, newPassword)
-      .then(() => {
-        toast.success("Password updated successfully!");
-      })
-      .catch(() => {
-        toast.error("Please try again!");
-      });
+    try {
+      setIsPasswordUpdating(true);
+      await updatePassword(auth.currentUser, newPassword);
+      toast.success("Password updated successfully!");
+      setNewPassword("");
+    } catch (error) {
+      toast.error("Please try again!");
+    } finally {
+      setIsPasswordUpdating(false);
+    }
   };
 
   const handleSignOut = async () => {
-    await signOut(auth)
-      .then(() => {
-        toast.success("Successfully signout!");
-      })
-      .catch(() => {
-        toast.error("Please try again!");
-      });
+    try {
+      setIsSignout(true);
+      await signOut(auth);
+      toast.success("Successfully signout!");
+    } catch (error) {
+      toast.error("Please try again!");
+    } finally {
+      setIsSignout(false);
+    }
   };
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen p-4 overflow-auto dark:bg-darkPrimary dark:text-darkSecondary">
-      <div className="flex flex-col gap-6 w-full max-w-md">
+      <div className="flex flex-col gap-4 w-full max-w-md">
         <h2 className="text-4xl font-bold text-center ">{t("noteSettings")}</h2>
         <div className="flex flex-col gap-2">
           <label className="text-lg">{t("prevEmail")}</label>
@@ -128,6 +140,7 @@ function SettingsPage() {
         <ButtonComp
           btnType="button"
           btnIcon={<MdOutlineTipsAndUpdates />}
+          btnDisabled={isEmailUpdating}
           title={t("updateEmail")}
           clickOnUniversalBtn={handleUpdateEmail}
         />
@@ -143,12 +156,14 @@ function SettingsPage() {
         <ButtonComp
           btnType="button"
           btnIcon={<MdOutlineTipsAndUpdates />}
+          btnDisabled={isPasswordUpdating}
           title={t("updatePassword")}
           clickOnUniversalBtn={handleUpdatePassword}
         />
         <ButtonComp
           btnType="button"
           btnIcon={<LiaSignOutAltSolid />}
+          btnDisabled={isSignout}
           title={t("signout")}
           clickOnUniversalBtn={handleSignOut}
         />

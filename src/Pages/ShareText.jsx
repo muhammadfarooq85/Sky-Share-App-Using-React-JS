@@ -26,6 +26,7 @@ function TextsPage() {
   const [loading, setLoading] = useState(false);
   const [isText, setIsText] = useState(false);
   const [userKey, setUserKey] = useState("");
+  let [isTextUploading, setTextUplaoding] = useState(false);
   const { t } = useTranslation();
   const { isUser } = useContext(UserContext);
 
@@ -65,6 +66,7 @@ function TextsPage() {
       return;
     }
     try {
+      setTextUplaoding(true);
       if (!isUser) {
         toast.error("Please login or signup first!");
         return;
@@ -79,9 +81,9 @@ function TextsPage() {
       setTextValue("");
       setTextPasssword("");
     } catch (error) {
-      console.log(error);
-
       toast.error("Please try again.");
+    } finally {
+      setTextUplaoding(false);
     }
   };
 
@@ -95,7 +97,7 @@ function TextsPage() {
       toast.success("Your shared text deleted successfully.");
       setIsText(false);
       setTextValue("");
-      setUserKey(""); // Clear the saved key
+      setUserKey("");
     } catch (error) {
       toast.error("Please try again.");
     }
@@ -152,6 +154,7 @@ function TextsPage() {
           <ButtonComp
             btnType="button"
             title={t("save")}
+            btnDisabled={isTextUploading}
             clickOnUniversalBtn={uploadText}
           />
         )}

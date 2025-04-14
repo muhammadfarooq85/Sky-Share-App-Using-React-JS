@@ -31,6 +31,7 @@ function FilesPage() {
   const [progress, setProgress] = useState(0);
   const [filesPassword, setFilesPassword] = useState("");
   const [userKey, setUserKey] = useState("");
+  let [isFileUploading, setFileUplaoding] = useState(false);
   const { isUser } = useContext(UserContext);
   const { t } = useTranslation();
 
@@ -95,6 +96,7 @@ function FilesPage() {
     }
 
     try {
+      setFileUplaoding(true);
       if (!isUser) {
         toast.error("Please login first!");
         return;
@@ -119,6 +121,8 @@ function FilesPage() {
       setProgress(0);
     } catch (error) {
       toast.error("An error occurred while uploading files. Please try again.");
+    } finally {
+      setFileUplaoding(false);
     }
   };
 
@@ -244,6 +248,7 @@ function FilesPage() {
         <ButtonComp
           btnType="button"
           title={t("save")}
+          btnDisabled={isFileUploading}
           clickOnUniversalBtn={handleAllFilesUpload}
         />
       </div>

@@ -55,6 +55,9 @@ function SkySharePage() {
         </div>
         <FloatBtnComp />
       </div>
+      <div className="app-version flex justify-end">
+        <h3 className="text-lg">You are using app version v1.2.0.</h3>
+      </div>
     </div>
   );
 }

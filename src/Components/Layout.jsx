@@ -151,7 +151,7 @@ const LayoutComp = () => {
       </Drawer>
       <Layout className="dark:bg-darkPrimary ">
         <Content style={{ margin: "0 16px" }}>
-          <div className="breadCrumbDiv flex justify-between items-center ">
+          <div className="breadCrumbDiv flex justify-between items-center">
             <Breadcrumb
               className="dark:text-darkSecondary"
               style={{ margin: "16px 0px" }}

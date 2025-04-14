@@ -35,12 +35,12 @@ const resources = {
       save: "Save",
       clear: "Clear",
       copy: "Copy",
-      deleteAll: "Delete All",
+      deleteAll: "Delete All Slected Files",
       viewfiles: "View Files",
       addFiles: "Add Files or",
       noteFiles: `Note:- If you want to decrypt shared files. Please provide the password.
       Our system will automatically detect your password.`,
-      noteTexts: ` Note:- If you want to decrypt shared text. Please provide password.
+      noteTexts: ` Note:- If you want to view shared text. Please provide password.
       Our system will autmatically detect your password.`,
       drag: "drag and drop",
       cancel: "Cancel",
@@ -53,12 +53,9 @@ const resources = {
       step1: "Step 1",
       step2: "Step 2",
       step3: "Step 3",
-      step1Cnt: `Make sure that you have
-      stable internet connection.`,
-      step2Cnt: `Upload to Sky Share anything you want
-      like text, links and files etc.`,
-      step3Cnt: `Supported on multiple platforms like
-      Mobiles, Tabs and desktops etc.`,
+      step1Cnt: `If you want to share. Then make sure you are login first. Otherwise you can't share text or files.`,
+      step2Cnt: `If you want to share, then upload your text and files ans set a password for that.`,
+      step3Cnt: `If you want to view the shared files and text. Just provide a password.`,
       installApp: "Install App",
       feedbackForm: "Feedback Form",
       shareOpinion: "Please Share your opinion.",
@@ -120,18 +117,17 @@ const resources = {
       exploreContact: "رابطہ دریافت کریں۔",
       exploreAccount: "اکاؤنٹ دریافت کریں۔",
       exploreWorking: "کام کو دریافت کریں۔",
-      exploreSettings:"ترتیبات کو دریافت کریں۔",
+      exploreSettings: "ترتیبات کو دریافت کریں۔",
       textAreaPlaceHolder: "وہ متن ٹائپ کریں جسے آپ شیئر کرنا چاہتے ہیں...",
       save: "محفوظ کریں۔",
       signupGoogle: "گوگل کے ساتھ سائن اپ کریں۔",
       clear: "صاف",
       copy: "کاپی",
-      deleteAll: "تمام حذف کریں",
+      deleteAll: "تمام منتخب فائلوں کو حذف کریں",
       viewfiles: "ویو فائلز",
       addFiles: "فائلیں شامل کریں",
       noteFiles: `نوٹ:- اگر آپ مشترکہ فائلوں کو ڈیکرپٹ کرنا چاہتے ہیں۔ براہ کرم پاس ورڈ فراہم کریں۔ ہمارا سسٹم خود بخود آپ کے پاس ورڈ کا پتہ لگائے گا۔`,
-      noteTexts: `نوٹ:- اگر آپ مشترکہ متن کو ڈیکرپٹ کرنا چاہتے ہیں۔ براہ کرم پاس ورڈ فراہم کریں۔
-      ہمارا سسٹم خودکار طور پر آپ کے پاس ورڈ کا پتہ لگائے گا۔`,
+      noteTexts: `نوٹ:- اگر آپ مشترکہ فائلوں کو ڈیکرپٹ کرنا چاہتے ہیں۔ براہ کرم پاس ورڈ فراہم کریں۔ ہمارا سسٹم خود بخود آپ کے پاس ورڈ کا پتہ لگائے گا۔`,
       drag: " یا ڈریگ ڈراپ کریں۔",
       cancel: "منسوخ کریں",
       downloadAll: "تمام ڈاؤن لوڈ کریں۔",
@@ -142,12 +138,9 @@ const resources = {
       step1: "مرحلہ نمبر 1",
       step2: "مرحلہ نمبر 2",
       step3: "مرحلہ نمبر 3",
-      step1Cnt: `یقینی بنائیں کہ آپ کے پاس ہے۔
-      مستحکم انٹرنیٹ کنیکشن۔`,
-      step2Cnt: `اسکائی پر اپ لوڈ کریں جو بھی آپ چاہتے ہیں شیئر کریں۔
-      جیسے ٹیکسٹ، لنکس اور فائلز وغیرہ۔`,
-      step3Cnt: `جیسے متعدد پلیٹ فارمز پر تعاون یافتہ
-      موبائل، ٹیبز اور ڈیسک ٹاپ وغیرہ۔`,
+      step1Cnt: `اگر آپ شیئر کرنا چاہتے ہیں۔ پھر یقینی بنائیں کہ آپ پہلے لاگ ان ہیں۔ بصورت دیگر آپ ٹیکسٹ یا فائلز کا اشتراک نہیں کر سکتے۔`,
+      step2Cnt: `اگر آپ شیئر کرنا چاہتے ہیں تو اپنا ٹیکسٹ اور فائلیں اپ لوڈ کریں اور اس کے لیے پاس ورڈ سیٹ کریں۔`,
+      step3Cnt: `اگر آپ مشترکہ فائلوں اور متن کو دیکھنا چاہتے ہیں۔ بس پاس ورڈ فراہم کریں۔`,
       installApp: "ایپ انسٹال کریں",
       feedbackForm: "فیڈ بیک فارم",
       shareOpinion: "برائے مہربانی اپنی رائے شیئر کریں۔",

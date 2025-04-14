@@ -76,6 +76,8 @@ function TextsPage() {
       });
       toast.success("Your text uploaded successfully.");
       setUserKey(newTextRef.key);
+      setTextValue("");
+      setTextPasssword("");
     } catch (error) {
       console.log(error);
 

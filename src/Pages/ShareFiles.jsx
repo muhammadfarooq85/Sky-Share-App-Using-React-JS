@@ -34,19 +34,6 @@ function FilesPage() {
   const { isUser } = useContext(UserContext);
   const { t } = useTranslation();
 
-  const handleFileModal = () => {
-    if (!filesPassword) {
-      toast.error("Please provide a password!");
-      return;
-    }
-
-    if (!passwordRegex.test(filesPassword)) {
-      toast.error("Invalid password!");
-      return;
-    }
-    setOpen(true);
-  };
-
   const onFileUpload = (acceptedFiles) => {
     const newFiles = acceptedFiles.map((file) => ({
       file,
@@ -78,8 +65,9 @@ function FilesPage() {
       toast.error("Please select files first!");
       return;
     }
-    setFiles([]);
-    toast.success("All files are deleted successfully!");
+    toast.success("All files are cleared successfully!");
+    setOpen(false);
+    setFilesPassword("");
   };
 
   const isImage = (file) => file.type.startsWith("image/");
@@ -126,8 +114,8 @@ function FilesPage() {
       });
       toast.success("Your files were uploaded successfully.");
       setUserKey(newSharedFilesRef.key);
-      setFilesPassword("");
       setFiles([]);
+      setFilesPassword("");
       setProgress(0);
     } catch (error) {
       toast.error("An error occurred while uploading files. Please try again.");
@@ -189,55 +177,62 @@ function FilesPage() {
   return (
     <div className="dark:bg-darkPrimary dark:text-darkSecondary">
       <div className="flex justify-end items-end mb-2">
-        <ButtonComp
-          btnType="button"
-          clickOnUniversalBtn={handleDleteAllFiles}
-          title={t("deleteAll")}
-          btnIcon={<MdDelete />}
-        />
+        {files.length > 0 ? (
+          <ButtonComp
+            btnType="button"
+            clickOnUniversalBtn={handleDleteAllFiles}
+            title={t("deleteAll")}
+            btnIcon={<MdDelete />}
+          />
+        ) : (
+          ""
+        )}
       </div>
-      {progress > 0 && (
-        <div className="flex justify-center items-center w-full">
+      {progress > 0 ? (
+        <div className="flex justify-center items-center w-full mb-96">
           <Progress strokeLinecap="butt" percent={progress} />
         </div>
-      )}
-      <div className="mainTexts flex flex-col justify-between items-start min-h-screen w-full">
-        <div className="filesDiv flex justify-start items-center flex-wrap">
-          {files.map((fileObj, index) => (
-            <div key={index} className="p-2 relative">
-              {fileObj?.loading && isImage(fileObj?.file) && (
-                <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
-                  <LoaderComp />
-                </div>
-              )}
-              <div className="flex flex-col justify-center items-center cursor-pointer relative">
-                <MdDelete
-                  onClick={() => removeImage(index)}
-                  className="absolute text-red-600 top-1 right-1"
-                  size={30}
-                />
-                {isImage(fileObj.file) ? (
-                  <img
-                    src={URL.createObjectURL(fileObj.file)}
-                    alt={`file-preview-${index}`}
-                    className={`w-32 h-32 object-cover rounded-md ${
-                      fileObj.loading ? "opacity-0" : "opacity-100"
-                    }`}
-                    onLoad={() => handleImageLoad(index)}
-                  />
-                ) : (
-                  <MdFilePresent size={150} />
+      ) : (
+        <div className="mainTexts flex flex-col justify-between items-start min-h-screen w-full">
+          <div className="filesDiv flex justify-start items-center flex-wrap">
+            {files.map((fileObj, index) => (
+              <div key={index} className="p-2 relative">
+                {fileObj?.loading && isImage(fileObj?.file) && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
+                    <LoaderComp />
+                  </div>
                 )}
-                <span className="font-semibold">
-                  {fileObj.file.name.slice(0, 5)}
-                  {fileObj.file.name.slice(fileObj.file.name.lastIndexOf("."))}
-                </span>
+                <div className="flex flex-col justify-center items-center cursor-pointer relative">
+                  <MdDelete
+                    onClick={() => removeImage(index)}
+                    className="absolute text-[#f5f5f5] top-1 right-1"
+                    size={30}
+                  />
+                  {isImage(fileObj.file) ? (
+                    <img
+                      src={URL.createObjectURL(fileObj.file)}
+                      alt={`file-preview-${index}`}
+                      className={`w-32 h-32 object-cover rounded-md ${
+                        fileObj.loading ? "opacity-0" : "opacity-100"
+                      }`}
+                      onLoad={() => handleImageLoad(index)}
+                    />
+                  ) : (
+                    <MdFilePresent size={150} />
+                  )}
+                  <span className="font-semibold">
+                    {fileObj.file.name.slice(0, 5)}
+                    {fileObj.file.name.slice(
+                      fileObj.file.name.lastIndexOf(".")
+                    )}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
-          <DropzoneComp onDrop={onDrop} />
+            ))}
+            <DropzoneComp onDrop={onDrop} />
+          </div>
         </div>
-      </div>
+      )}
       <span className="text-lg text-red-900">{t("noteFiles")}</span>
       <InputComp
         inputType="password"
@@ -245,12 +240,7 @@ function FilesPage() {
         inputOnChange={(e) => setFilesPassword(e.target.value)}
         inputPlaceHolder=" ****** "
       />
-      <div className="filesBtn flex justify-end items-end gap-2 p-4">
-        <ButtonComp
-          btnType="button"
-          title={t("viewfiles")}
-          clickOnUniversalBtn={handleFileModal}
-        />
+      <div className="filesBtn flex justify-end mt-2">
         <ButtonComp
           btnType="button"
           title={t("save")}
@@ -263,7 +253,6 @@ function FilesPage() {
         userKey={userKey}
         filesPassword={filesPassword}
         setUserKey={setUserKey}
-        handleFileModal={handleFileModal}
       />
       <FloatBtnComp />
     </div>

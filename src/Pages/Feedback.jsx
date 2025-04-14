@@ -19,6 +19,7 @@ function FeedbackPage() {
   const [aboutSelectedField, setAboutSelectedField] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  let [isFeedbackSubmit, setIsFeedbackSumit] = useState(false);
   const { t } = useTranslation();
 
   const handleFeedback = async () => {
@@ -48,6 +49,7 @@ function FeedbackPage() {
     }
 
     try {
+      setIsFeedbackSumit(true);
       const response = await fetch("https://formspree.io/f/xvoewqbe", {
         method: "POST",
         headers: {
@@ -72,13 +74,15 @@ function FeedbackPage() {
       }
     } catch (error) {
       toast.error("Please try again!");
+    } finally {
+      setIsFeedbackSumit(false);
     }
   };
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen dark:bg-darkPrimary dark:text-darkSecondary">
       <h1 className="text-4xl font-bold text-center">{t("feedbackForm")}</h1>
-      <div className="flex flex-col justify-center items-center w-[50%] gap-4 mt-6">
+      <div className="flex flex-col justify-center items-center w-[70%] gap-4 mt-6">
         <InputComp
           inputType="text"
           inputValue={name}
@@ -109,6 +113,7 @@ function FeedbackPage() {
         <ButtonComp
           btnType="button"
           btnIcon={<MdSend />}
+          btnDisabled={isFeedbackSubmit}
           clickOnUniversalBtn={handleFeedback}
           title="Send Us"
         />

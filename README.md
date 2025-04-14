@@ -1,6 +1,6 @@
 # Sky Share App
 
-# v1.0.0.0
+# v1.2.0
 
 ## Sky Share App is a web application designed for seamless file sharing and collaboration. Built using React.js, Firebase Realtime Database, Ant Design, Material Tailwind, and Tailwind CSS, the application offers a modern and responsive user interface with robust real-time data handling.
 
